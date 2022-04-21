@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.tela2{
+
+    background-color: #E5E5E5;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    width: 100%;
+    height: 100%;
+
+}
+
+
+.topo {
+    background: #EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    width: 100%;
+    height: 69px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+
+    z-index: 99999;
+
+    }
+
+.topo p {
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 43px;
+    color: #FFFFFF;
+
+}
+
+#titulo-quizz{
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./img/background-titulo.png);
+    background-position: center;
+
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 227px;
+    margin-top: 69px;
+    
+}
+
+#titulo-quizz p{
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    text-align: center;
+    
+    color: #FFFFFF;   
+
+    
+}
+
+
+.bloco{
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+
+    width: 759px;
+    height: 676px;
+    margin: 338px 50% 0px 25%;
+
+}
+
+.pergunta{
+
+    background-color: #434CA0;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 688px;
+    height: 138px;  
+
+}
+
+.pergunta p{
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    text-align: center;
+    
+    color: #FFFFFF;
+    
+}
+
+.respostas{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 688px;
+    height: 455px;
+}
+
+.respostas p{
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    
+    color: #000000;
+
+}
+
+.respostas img{
+
+    position: relative;
+
+    width: 329.91px;
+    height: 175.2px;
+
+}
