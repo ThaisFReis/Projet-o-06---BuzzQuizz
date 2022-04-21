@@ -16,22 +16,58 @@
 
   </head>
 
-  <body>
-    <div class="tela2">
+  <!-- Usar os comentários para desativar as telas por enquanto -->
 
+  <body>
+
+
+    <!--
+    <div class="tela01">
+      <div class="topo">
+        <p>BuzzQuizz</p>
+      </div>
+
+      <div class="conteudo">
+
+        <div class="criarQuizz">
+          <p>Você não criou nenhum quizz ainda :(</p>
+          <button onclick="">Criar Quizz</button>
+        </div>
+
+        <p>Todos os Quizzes</p>
+        <div class="todosOsQuizzes">a</div>
+      </div>
+     
+      <div class="testeTamanho">testeTamanho
+      </div>
+
+    </div>
+
+  -->
+
+    <!-- Segunda Tela -->
+    <div class="tela02">
+
+      <!-- Topo da página -->
       <header class="topo"> <p>BuzzQuizz</p> </header>
 
+      <!-- Título do Quizz -->
+      <div id="titulo-quizz"> 
+        <p> O quão Potterhead é você? </p> 
+      </div>
+
+
+      <!-- Seção das perguntas e respostas -->
       <main>
-  
-        <div id="titulo-quizz"> 
-          <p> O quão Potterhead é você? </p> 
-        </div>
-  
+
         <section class="bloco">
+
           <div class="pergunta"> 
             <p> Em qual animal Olho-Tonto Moody transfigurou Malfoy? </p> 
           </div>
+
           <div class="respostas">
+
             <div id="resposta1" > 
               <img src="./img/gato.png">
               <p> Gatíneo </p> 
@@ -48,29 +84,62 @@
               <img src="./img/furao.png">
               <p> Mustela putorius (o Furão) </p> 
             </div>
+
           </div>
+
+        </section>
+
+        <section class="bloco">
+
+          <div class="pergunta"> 
+            <p> Qual dos objetos abaixo NÃO é uma horcrux? </p> 
+          </div>
+
+          <div class="respostas">
+
+            <div id="resposta1" > 
+              <img src="./img/harry.png">
+              <p> The boy who lived </p> 
+            </div>
+            <div id="resposta2"> 
+              <img src="./img/livro.png">
+              <p> O livro monstruoso dos monstros </p> 
+            </div>
+            <div id="resposta3"> 
+              <img src="./img/anel.png">
+              <p> Anel velho </p> 
+            </div>
+            <div id="resposta4">
+              <img src="./img/diadema.png">
+              <p> Diadema da Ravenclaw </p> 
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- Seção com o resultado -->
+        <section class="resultado">
+
+          <div class="topo-resultado">
+            <p> 88% de acerto: Você é praticamente um aluno de Hogwarts! </p>
+          </div>
+
+          <div class="bloco-resultado">
+            <img src="./img/resposta-final.png">
+            <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>
+          </div>
+          
         </section>
   
+        <!-- Botões -->
+        <section>
+          <button id="reiniciar">Reiniciar Quizz</button>
+          <button id="voltar">Voltar para home</button>
+        </section>
+
       </main>
 
-    </div>
-
-    <div class="tela01">
-      <div class="topo">
-        <p>BuzzQuizz</p>
-      </div>
-
-      <div class="conteudo">
-        <div class="criarQuizz">
-          <p>Você não criou nenhum quizz ainda :(</p>
-          <button onclick="">Criar Quizz</button>
-        </div>
-        <p>Todos os Quizzes</p>
-        <div class="todosOsQuizzes">a</div>
-      </div>
-     
-      <div class="testeTamanho">testeTamanho
-      </div>
     </div>
 
 
