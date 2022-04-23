@@ -4,6 +4,7 @@ let blocoDasRespostas = "";
 let elementoParente;
 let selecionaAResposta;
 let elementoSelecionado;
+let acessar;
 
 // API
 const pegarTodosOsQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
@@ -30,7 +31,6 @@ function renderizarTodosOsQuizzes(resposta) {
 }
 
 function abrindoQuizz(acessarQuizz){
-    let acessar = null;
     acessar = acessarQuizz.id;
 
     console.log(acessarQuizz)
@@ -67,8 +67,7 @@ function renderizarPerguntas(){
     const blocoDasPerguntas = document.querySelector(".bloco");
 
     perguntas.forEach(pergunta => {
-        let cor = pergunta.color;
-        
+        let cor = pergunta.color
         blocoDasPerguntas.innerHTML += `
         <section class="bloco">
             <div class="pergunta" id="${i}"> 
