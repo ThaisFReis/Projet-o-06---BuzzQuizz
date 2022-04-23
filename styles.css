@@ -38,7 +38,7 @@ body {
 }
 
 
-.conteudo {
+.tela01 {
     margin-top: 69px;
     padding-top: 77px;
 
@@ -46,7 +46,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-.conteudo .criarQuizz {
+.tela01 .criarQuizz {
     width: 80%;
     height: 181px;
     left: 194px;
@@ -60,19 +60,18 @@ body {
     justify-content: center;
     align-items: center;
     }
-.conteudo .criarQuizz p {
+.tela01 .criarQuizz p {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 23px;
     color: #B9B9B9;
+    text-align: center;
 }
-.conteudo .criarQuizz button {
+.tela01 .criarQuizz button {
     width: 151px;
     height: 40px;
-    left: 645px;
-    top: 254px;
     background: #FAFAFA;
     border: 1px dashed #EC362D;
     box-sizing: border-box;
@@ -87,8 +86,8 @@ body {
     cursor: pointer;
 }
 
-/*.conteudo p não funcionando como deveria funcionar(margin-top)---mudando para .conteudo nh*/
-.conteudo :nth-child(2) {
+/*.tela01 p não funcionando como deveria funcionar(margin-top)---mudando para .tela01 nh*/
+.tela01 > :nth-child(2) {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -99,7 +98,7 @@ body {
     margin-top: 77px;
 }
 
-.conteudo .todosOsQuizzes {
+.tela01 .todosOsQuizzes {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -108,26 +107,30 @@ body {
     margin-left: 10%;
     margin-top: 10px;
     background-color: aqua;
+    
 }
 /*[TUTOR] tive que repetir 2 classes com a msm coisa*/
-.conteudo .todosOsQuizzes .imagen {
+.tela01 .todosOsQuizzes .imagen {
     width: 340px;
     height: 181px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%), url(image.png);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
     border-radius: 5px;
     position: relative;
     margin-bottom: 10px;
     margin-right: 10px;
     cursor: pointer;
+    z-index: 1;
 }
-.conteudo .todosOsQuizzes img {
+.tela01 .todosOsQuizzes img {
     width: 340px;
     height: 181px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%), url(image.png);
     border-radius: 5px;
 }
+.tela01 .todosOsQuizzes .imagen:hover {
+
+}
 /*arrumar a transparencia entre texto-imagen*/
-.conteudo .todosOsQuizzes p {
+.tela01 .todosOsQuizzes p {
     color: white;
     position: absolute;
     z-index: 1;
@@ -236,6 +239,155 @@ body {
     cursor: pointer;
     
 }
+/*tela03*/
+
+
+
+.tela03 {
+    margin-top: 69px;
+    padding-top: 37px;
+    display: flex;
+    justify-content: center;
+
+}
+.tela03 .conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tela03 p {
+    width: 195px;
+    height: 23px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #000000;
+}
+.tela03 .inputs {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    margin-top: 27px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 21px;
+    padding-bottom: 11px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    
+}
+.tela03 input {
+    width: 564px;
+    height: 46px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.tela03 input::placeholder {
+    height: 22px;
+    left: 459.16px;
+    top: 228px;
+
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+
+    color: #BABABA;
+}
+.tela03 button {
+    width: 368px;
+    height: 54px;
+    background: #EC362D;
+    border-radius: 15px;
+    margin-top: 85px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFF5F4;
+}
+.tela03Perguntas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tela03Perguntas > p {
+    margin-bottom: 36px;
+
+}
+
+.tela03Perguntas .conteudo {
+    background-color: #FFFFFF;
+
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 21px;
+    padding-bottom: 11px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+.tela03Perguntas input {
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
+.tela03Perguntas .conteudo {
+    align-items: flex-start;
+    margin-bottom: 24px;
+    
+}
+.tela03Perguntas .conteudo p {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    display: inline;
+   
+}
+.espaco {
+    width: 10px;
+    height: 10px;
+}
+.perguntasDinamica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tela03Niveis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tela03Niveis p {
+    width: 100%;
+    margin-bottom: 43px;
+}
+.tela03Niveis .conteudo {
+    background-color: #FFFFFF;
+
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 21px;
+    padding-bottom: 11px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+.tela03Niveis .conteudo p {
+    display: inline;
+}
+
+
+
 
 
 .displaynone {
@@ -247,14 +399,14 @@ body {
     .testeTamanho {
         background-color: #EC362D;
     }
-    .conteudo .criarQuizz{
+    .tela01 .criarQuizz{
         width: 92%;
         margin-left: 4%;
     } 
-    .conteudo :nth-child(2) {
+    .tela01 > :nth-child(2) {
         margin-left: 4%;
     }
-    .conteudo .todosOsQuizzes {
+    .tela01 .todosOsQuizzes {
         width: 92%;
         margin-left: 4%;
         flex-direction: column;
@@ -266,5 +418,12 @@ body {
     .tela02{
         min-width: 375px;
     }
+
+    /* Tela 3 */
+    .tela03 input {
+        width: 375px;
+    }
+    
+    
 
 }
