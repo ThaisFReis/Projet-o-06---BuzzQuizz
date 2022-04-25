@@ -19,28 +19,24 @@
   <body>
 
 <!--topo de todas as telas-->
-    <div class="topo">
-      <p>BuzzQuizz</p>
-    </div>
+<div class="topo">
+  <p>BuzzQuizz</p>
+</div>
 
 <!--Primeira Tela (tela01)________________________________________________ -->
-    <div class="tela01 " >
-      <div class="conteudo">
+<div class="tela01 " >
 
-        <div class="criarQuizz">
-          <p>Você não criou nenhum quizz ainda :(</p>
-          <button onclick="">Criar Quizz</button>
-        </div>
 
-        <p>Todos os Quizzes</p>
-        <div class="todosOsQuizzes"></div>
-      </div>
-     
-      <div class="testeTamanho">testeTamanho
-      </div>
-      <img src="" alt="" srcset="">
-
+    <div class="criarQuizz">
+      <p>Você não criou nenhum <br/>quizz ainda :(</p>
+      <button onclick="criarQuizz()">Criar Quizz</button>
     </div>
+
+    <p>Todos os Quizzes</p>
+    <div class="todosOsQuizzes"></div>
+
+
+</div>
 <!--/Primeira Tela (tela01)_______________________________________________ -->
 
 <!-- Segunda Tela  (tela02)+++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -54,27 +50,94 @@
         <section class="bloco"> </section>
 
         <!-- Seção com o resultado -->
-        <section class="resultado">
-
-          <div class="topo-resultado">
-            <p></p>
-          </div>
-
-          <div class="bloco-resultado">
-            <img src="">
-            <p></p>
-          </div>
-          
-        </section>
+        <section class="resultadoFinal displaynone"> </section>
   
         <!-- Botões -->
-        <section>
-          <button id="reiniciar" onclick="reiniciar()">Reiniciar Quizz</button>
-          <button id="voltar" onclick="voltar()">Voltar para home</button>
-        </section>
+        <button id="reiniciar" onclick="reiniciar()">Reiniciar Quizz</button>
+        <button id="voltar" onclick="voltar()">Voltar para home</button>
 
     </main>
 <!-- /Segunda Tela (tela02)+++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<!-- Terceira Tela (tela03) ============================================== -->
+<div class="tela03">
+
+  <div class="tela03Comeco displaynone">
+
+    <div class="conteudo">
+      <p>Comece pelo começo</p>
+      <div class="inputs">
+        <input type="text" placeholder="Título do seu quizz">
+        <input type="url" name="imagen" id="" placeholder="URL da imagem do seu quizz">
+        <input type="number" name="questions" id="" placeholder="Quantidade de perguntas do seu quizz">
+        <input type="number" name="levels" id="" placeholder="Quantidade de níveis do seu quizz">
+      </div>
+      <button onclick="criarPerguntas()">Prosseguir para criar perguntas</button>
+    </div>
+    
+  </div>
+
+  <div class="tela03Perguntas displaynone ">
+    <p>Crie suas perguntas</p>
+
+    <div class="perguntasDinamica">
+<!--
+      <p>Pergunta 1</p>
+      <input type="text" placeholder="Texto da pergunta">
+      <input type="color" name="" id="" placeholder="Cor de fundo da pergunta">
+
+      <p>Resposta correta</p>
+      <input type="text" placeholder="Resposta correta">
+      <input type="url" name="" id="" placeholder="URL da imagem">
+
+      <p>Respostas incorretas</p>
+      <input type="text" placeholder="Resposta incorreta 1">
+      <input type="url" name="" id="" placeholder="URL da imagem 1">
+
+      <div class="espaco"></div>
+
+      <input type="text" placeholder="Resposta incorreta 2">
+      <input type="url" name="" id="" placeholder="URL da imagem 2">
+
+      <div class="espaco"></div>
+
+      <input type="text" placeholder="Resposta incorreta 3">
+      <input type="url" name="" id="" placeholder="URL da imagem 3">
+
+     
+  </div>
+-->
+    </div>
+  </div>
+  <div class="tela03Niveis displaynone ">
+
+      <p>Agora, decida os níveis</p>
+
+      <div class="conteudo">
+        <p>Nível 1</p>
+        <input type="text" placeholder="Título do nível">
+        <input type="number" name="" id="" placeholder="% de acerto mínimo">
+        <input type="url" name="" id="" placeholder="URL da imagem do nível">
+        <input type="text" placeholder="Descrição do nivel">
+
+      </div>
+      <button onclick="finalizarQuizz()">Finalizar Quizz</button>
+
+
+  </div>
+  <div class="tela03Pronto displaynone"></div>
+</div>
+
+
+
+
+<!-- /Terceira Tela (tela03) ============================================= -->
+
+
+
+
 
 
 
