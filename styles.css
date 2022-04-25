@@ -1,11 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-family: "Roboto", sans-serif !important;
+    outline: none !important;
+  }
+
 body {
     font-family: "Roboto", sans-serif;
     background-color: #FAFAFA;
 
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
 }
 
 
@@ -36,6 +46,9 @@ body {
     line-height: 43px;
     color: #FFFFFF;
 }
+button {
+    cursor: pointer;
+}
 
 
 .tela01 {
@@ -59,6 +72,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
     }
 .tela01 .criarQuizz p {
     font-family: 'Roboto';
@@ -101,91 +115,293 @@ body {
 .tela01 .todosOsQuizzes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    justify-content: space-between;
-    
+    flex-direction: row;
+    justify-content:space-between;
+    justify-items: center;
     
     width: 80%;
     margin-left: 10%;
     margin-top: 10px;
-    
     
 }
 /*[TUTOR] tive que repetir 2 classes com a msm coisa*/
 .tela01 .todosOsQuizzes .imagen {
     width: 340px;
     height: 181px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
-    border-radius: 5px;
+    display: flex;
     position: relative;
-    margin-bottom: 10px;
-    
+    margin: 20px auto 20px auto;
     cursor: pointer;
-    z-index: 1;
+
 }
 .tela01 .todosOsQuizzes img {
     width: 340px;
     height: 181px;
     border-radius: 5px;
+    opacity: 1;
 }
-.tela01 .todosOsQuizzes .imagen:hover {
 
+.gradiente{
+    position: absolute;
+    width: 340px;
+    height: 181px;
+    border-radius: 5px;
+    z-index: 2;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, black 100%);
 }
+
+
+
+/*.tela01 .todosOsQuizzes .imagen:hover {
+
+}*/
 /*arrumar a transparencia entre texto-imagen*/
 .tela01 .todosOsQuizzes p {
-    color: white;
     position: absolute;
-    z-index: 1;
-    bottom: 0px;
-    background-color:rgba(0, 0, 0, 0.4);
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    width: 90%;
+    font-size: 19px;
+    font-weight: 400;
+    text-align: center;
+    word-wrap: break-word;
+    color: white;
     
 }
-
-.testeTamanho {
-    background-color: green;
-}
-
 
 /* Tela 2 */
 
 .tela02{
-    background-color: aqua;
-    
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-
-    width: 100%;
-    height: 100%;
+    flex-direction: column;
+    gap: 24px;
 }
 
 #titulo-quizz{
     position: relative;
     
-    background-color: brown;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url();
-    background-position: center;
+    background: black;
 
-    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 100%;
-    height: 227px;
-    top: 69px;
+    height: 230px;
+    margin-top: 40px;
+
+    overflow: hidden;
 }
 
 #titulo-quizz p{
+    position: absolute;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    text-align: center;
+    margin-bottom: 50px;
+    
+    color: #FFFFFF;   
+}
+
+#titulo-quizz img{
+    opacity: 0.3;
+    width: 100%;
+
+}
+
+.bloco{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 759px;
+    height: fit-content;
+    margin-top: 50px;
+
+}
+
+.blocoDeCadaPergunta{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+
+    width: 760px;
+    height: fit-content;
+    margin-bottom:50px;
+}
+
+.pergunta{
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 688px;
+    height: fit-content;
+    margin-top: 30px;
+
+}
+
+.pergunta p{
+
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     font-size: 23px;
     line-height: 27px;
     text-align: center;
+    word-break: normal;
+    margin: 20px;
+
+    color: #FFFFFF;
+
+}
+
+.respostas{
+    position: relative;
+
+    display: flex;
+    display: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    width: 688px;
+    height: fit-content;
+    margin-top: 15px;
+    margin-bottom: 30px;
     
-    color: #FFFFFF;   
+}
+
+.resposta p{
+    position: relative;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    word-break: break-all;
+    margin: 5px;
+
+    color: #000000;
+
+    cursor: pointer;
+
+}
+
+.resposta img{
+
+    width: 330px;
+    height: 175px;
+
+
+    cursor: pointer;
+
+}
+
+.resultadoFinal{
+    background: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+
+    position: relative;  
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  
+    width: 759px;
+    height: fit-content;
+    margin-top: 70px;
+    
+}
+
+.topo-resultado{
+    background: #ec362d;
+
+    width: 759px;
+    height: 430px;
+    margin: 60px auto auto auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 727px;
+    height: fit-content;
+    margin-top: 20px;
+}
+
+.topo-resultado p{
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    text-align: center;
+    word-break: break-all;
+    margin: 20px;
+
+    color: #FFFFFF;
+        
+}
+
+.bloco-resultado{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+
+
+    width: 650px;
+    height: 100%;
+    margin: 20px;
+}
+
+.bloco-resultado p{
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    text-align: justify;
+    word-break: normal;
+    margin: 20px;
+
+    color: #484848;
+}
+
+.bloco-resultado img{
+
+    width: 364px;
+    height: 273px;
+    margin: 20px auto 20px 20px;
+
+}
+
+.naoSelecionada{
+    opacity: 0.3;
 }
 
 
@@ -197,9 +413,10 @@ body {
     border-radius: 15px;
 
     position: relative;
-    width: 259.57px;
+    width: 260px;
     height: 52px;
-    margin: 60px auto auto auto;
+    margin: 50px auto 5px auto;
+    bottom: 0;
 
     font-family: 'Roboto';
     font-style: normal;
@@ -217,14 +434,17 @@ body {
     
 }
 
+#reiniciar.clicado{
+    background-color: white;
+}
+
 #voltar{
     background-color: transparent;
     border: none;
 
     position: relative;
-    width: 219.64px;
-    height: 44px;
-    margin: 20px auto 30px auto;
+    width: 220px;
+    bottom: 0;
     
     font-family: 'Roboto';
     font-style: normal;
@@ -324,6 +544,19 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.telao3Perguntas .conteudo .ioniconsP{
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+.tela03Perguntas .conteudo ion-icon{
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 440px;
+   
+}
 
 .tela03Perguntas > p {
     margin-bottom: 36px;
@@ -349,7 +582,7 @@ body {
     margin-bottom: 24px;
     
 }
-.tela03Perguntas .conteudo p {
+.tela03Perguntas .conteudo  p {
     margin-top: 25px;
     margin-bottom: 10px;
     display: inline;
@@ -358,6 +591,10 @@ body {
 .espaco {
     width: 10px;
     height: 10px;
+}
+.espaco2{
+    width: 10px;
+    height: 50px;
 }
 .perguntasDinamica {
     display: flex;
@@ -374,6 +611,10 @@ body {
     width: 100%;
     margin-bottom: 43px;
 }
+.tela03Niveis .conteudo p {
+    display: inline;
+    margin-bottom: 10px;
+}
 .tela03Niveis .conteudo {
     background-color: #FFFFFF;
 
@@ -385,9 +626,21 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
 
     margin-bottom: 24px;
+
+    
 }
-.tela03Niveis .conteudo p {
+.tela03Niveis .conteudo .ioniconsP  {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.tela03Niveis .conteudo .ioniconsP p {
     display: inline;
+}
+.tela03Niveis .conteudo  ion-icon {
+    cursor: pointer;
 }
 .tela03Niveis button {
     margin-top: 74px;
@@ -429,39 +682,75 @@ body {
 
 @media (max-width: 1100px) {
     /* Tela 1 */
-    .testeTamanho {
-        background-color: #EC362D;
-    }
-    .tela01 .criarQuizz{
-        width: 92%;
-        margin-left: 4%;
-    } 
-    .tela01 > :nth-child(2) {
-        margin-left: 4%;
-    }
-    .tela01 .todosOsQuizzes {
-        width: 92%;
-        margin-left: 4%;
-     
-        flex-direction: column;
-        align-items: center;
-       
-       
-        
-    }
+
 
     /* Tela 2 */
 
-    .tela02{
-        min-width: 375px;
+    .blocoDeCadaPergunta{
+         width: 80vw;
     }
+
+    .pergunta{
+        width: 70vw;
+    }
+
+    .pergunta p{
+        font-size: 100%;
+    }
+
+    .respostas{
+        width: 70vw;
+    }
+
+    .resposta p{
+        font-size: 100%;
+    }
+
+    .resultadoFinal{
+        width: 80vw;
+    }
+
+    .topo-resultado{
+        width: 70vw;
+    }
+
+    .topo-resultado p{
+        font-size: 100%;
+    }
+
+    .bloco-resultado{
+        width: 80vw;
+    }
+
+    .bloco-resultado p{
+        font-size: 100%;
+        word-break: break-all;
+    }
+
+
+
 
     /* Tela 3 */
     .tela03 input {
         max-width: 350px;
     }
+    .tela03Perguntas .conteudo ion-icon{
+        margin-left: 225px;
+       
+    }
 
+    /* Tela 3 */
+    .tela03 input {
+        width: 375px;
+    }
+
+    
     
     
 
 }
+
+
+
+
+

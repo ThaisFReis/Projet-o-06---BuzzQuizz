@@ -1,10 +1,5 @@
-let lista;
-let i = 0;
-let blocoDasRespostas = "";
-let elementoParente;
-let selecionaAResposta;
-let elementoSelecionado;
-
+let click = 0;
+let ponto = 0;
 
 //TELA 01
 /*
@@ -57,26 +52,21 @@ function renderizarTodosOsQuizzes(resposta) {
         `
         <div class="imagen" onclick="abrindoQuizz(${lista[i].id})">
             <img src="${lista[i].image}" alt="">
+            <div class="gradiente">
             <p>${lista[i].title}</p>
         </div>
         `
     }
 
-    return lista
 }
 
 function abrindoQuizz(acessarId){
-   
 
-    
     let acessarIdString = acessarId.toString()
     console.log(typeof acessarIdString)
     const buscar = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${acessarIdString}`) //mesma lógica da parte do whatsapp do DrivenEats
     buscar.then(pagina2)
-
     
-   
-    document.querySelector("#titulo-quiz").scrollIntoView();
 }
 
 function pagina2(resposta){
@@ -85,6 +75,8 @@ function pagina2(resposta){
 
     document.querySelector(".tela01").classList.add("displaynone")
     document.querySelector(".tela02").classList.remove("displaynone")
+
+    document.querySelector(".tela02").scrollIntoView();
     headerDoQuizz()
     renderizarPerguntas()
 }
@@ -102,21 +94,23 @@ function headerDoQuizz(){
 }
 
 function renderizarPerguntas(){
+    let i = 0;
+
     const perguntas = lista.questions;
     const blocoDasPerguntas = document.querySelector(".bloco");
 
     perguntas.forEach(pergunta => {
-        let cor = pergunta.color;
-        
+        let cor = pergunta.color
         blocoDasPerguntas.innerHTML += `
-        <section class="bloco">
-            <div class="pergunta" id="${i}"> 
+        <div class="blocoDeCadaPergunta">
+            <div class="pergunta" id="${i}" > 
                 <p>${pergunta.title}</p> 
             </div>
 
             <div class="respostas">${renderizarRespostar(pergunta)}</div>
-        </section>
+        </div>
         `
+
         document.getElementById(`${i}`).style.backgroundColor = cor
         i++
     });
@@ -124,16 +118,17 @@ function renderizarPerguntas(){
 }
 
 function renderizarRespostar(pergunta){
+    let blocoDasRespostas = "";
     const respostas = pergunta.answers
     const embaralharRespostas = respostas.sort(() => Math.random() - 0.5)
     console.log(respostas)
     console.log(embaralharRespostas)
 
-    embaralharRespostas.forEach(resposta => {
+    respostas.forEach(resposta => {
         blocoDasRespostas += `
         <div class="resposta ${resposta.isCorrectAnswer}" onclick="escolherResposta(this)"> 
-            <img src="${embaralharRespostas.image}">
-            <p>${embaralharRespostas.text}</p> 
+            <img src="${resposta.image}">
+            <p>${resposta.text}</p> 
         </div>
         `
     })
@@ -142,36 +137,110 @@ function renderizarRespostar(pergunta){
 }
 
 function escolherResposta(elemento){
-    console.log(elemento)
-    elemento.classList.add("selecionada")
-    elementoParente = elemento.parentNode
-    selecionaAResposta = elementoParente.querySelectorAll(".resposta")
 
-    selecionaAResposta.forEach(resposta => {
-        elementoSelecionado = resposta.classList.contains("selecionada")
-        if (elementoSelecionado == false){
-            resposta.classList.add("naoSelecionado")
-            resposta.setAttribute("onclick", "")
-        }
+    let elementoParente = elemento.parentNode;
+    let selecionarResposta = elementoParente.querySelectorAll(".resposta");
+    let elementoSelecionado;
+    let quizResultado = document.querySelector(".resultadoFinal");
 
-        else{
-            resposta.setAttribute("onclick", "")
+    if(!elemento.classList.contains("selecionada")){
+        click++
+
+        if(elemento.classList.contains("true")){
+            ponto++
         }
-    })
-    escolherResposta(elemento)
+        elemento.classList.add("selecionada")
+            selecionarResposta.forEach(resposta => {
+                elementoSelecionado = resposta.classList.contains("selecionada")
+                if (elementoSelecionado == false){
+                    resposta.classList.add("naoSelecionada")
+                    resposta.setAttribute("onclick", "")
+                }
+            })
+
+            let parente = elemento.parentNode;
+        
+            let verdadeiro = parente.querySelector(".true p");
+            verdadeiro.style.color="green";
+        
+            let falso = parente.querySelectorAll(".false p"); 
+            falso.forEach(pergunta => {
+                pergunta.style.color="red";
+            });
+    }
+
+    let tamanho = lista.questions
+    let numeroDePerguntas = tamanho.length;
+    console.log(numeroDePerguntas)
+    console.log(click)
+    if(click == numeroDePerguntas){
+        let pontos = Math.round((click / numeroDePerguntas) * 100);
+        console.log(pontos)
+        let niveis = lista.levels;
+        console.log(niveis)
+        niveis.sort()
+
+        niveis.forEach(lista => {
+            if(pontos >= lista.minValue){
+                quizResultado.innerHTML = `
+                <div class="topo-resultado">
+                    <p> ${pontos}% de acerto: ${lista.title}</p>
+                </div>
+                
+                <div class="bloco-resultado">
+                    <img src="${lista.image}">
+                    <p>${lista.text}</p>
+                </div>
+            `
+            }
+        })
+        quizResultado.classList.remove("displaynone")
+        setTimeout(() => {
+            window.scrollTo({top: document.body.scrollHeight, behavior: "smooth",
+            });
+          }, 300);
+    }
+    else {
+        setTimeout(() => {
+            window.scrollBy({top: elemento.parentElement.parentElement.offsetHeight + 30, behavior: "smooth",
+            })
+          }, 300)
+    }
+
+    if (!quizResultado.classList.contains("displaynone")){
+        pontos = 0
+        click = 0
+        ponto = 0
+    }
+} 
     
-    //Ir para próxima pergunta
-    /*setTimeout(() => {
-
-    })*/
-}
-
 
 // Botões
 
-function reiniciar(){
-    const elemento = document.querySelector(".tela02")
-    elemento.scrollIntoView()
+
+function reiniciar(resposta){
+    setTimeout(() => {
+        window.scrollTo({top: 0, behavior: "smooth",
+        });
+      }, 200);
+
+
+    let tirarCor = document.querySelectorAll(".respostas p")
+    tirarCor.forEach(p => {
+        p.style.color = "black"
+    })
+
+    let resetarImagens = document.querySelectorAll(".resposta")
+    resetarImagens.forEach(  resposta => {
+        resposta.classList.remove("naoSelecionada")
+        resposta.classList.remove("selecionada")
+        resposta.removeAttribute("onclick", "")
+        resposta.setAttribute("onclick", "escolherResposta(this)")
+    })
+
+    let resetarResultado = document.querySelector(".resultadoFinal")
+    resetarResultado.classList.add("displaynone")
+
 }
 
 function voltar(){
@@ -231,9 +300,12 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
 
         let selecionado = document.querySelector(".tela03Perguntas").querySelector(".perguntasDinamica");
         
-    
+    //transformar/diminuir pergunta02
         for(let i = 0; i < qtdPerguntasTela03Comeco; i++) {
-        selecionado.innerHTML += `
+            if (i == 0) {
+
+
+            selecionado.innerHTML += `
             <div class="conteudo pergunta${i + 1}">
                 <p>Pergunta ${i + 1}</p>
                 <input class="inputTextoPergunta" type="text" placeholder="Texto da pergunta">
@@ -260,10 +332,49 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
             
             </div>
         `
+
+            }
+            else {
+
+                selecionado.innerHTML += `
+                <div class="conteudo pergunta${i + 1}">
+
+                    <div class="ioniconsP">
+                        <p>Pergunta ${i + 1}</p>
+                        <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
+                    </div>
+
+                    <input class="inputTextoPergunta" type="text" placeholder="Texto da pergunta">
+                    <input class="inputCorPergunta" type="color" name="" id="" placeholder="Cor de fundo da pergunta">
+    
+                    <p>Resposta correta</p>
+                    <input class="respostaCorreta" type="text" placeholder="Resposta correta">
+                    <input class="urlImagemRespostaCorreta" type="url" name="" id="" placeholder="URL da imagem">
+    
+                    <p>Respostas incorretas</p>
+                    <input class="respostaIncorreta01" type="text" placeholder="Resposta incorreta 1">
+                    <input class="urlImagemRespostaIncorreta01" type="url" name="" id="" placeholder="URL da imagem 1">
+    
+                    <div class="espaco"></div>
+    
+                    <input class="respostaIncorreta02" type="text" placeholder="Resposta incorreta 2">
+                    <input class="urlImagemRespostaIncorreta02" type="url" name="" id="" placeholder="URL da imagem 2">
+    
+                    <div class="espaco"></div>
+    
+                    <input class="respostaIncorreta03" type="text" placeholder="Resposta incorreta 3">
+                    <input class="urlImagemRespostaIncorreta03" type="url" name="" id="" placeholder="URL da imagem 3">
+    
+                
+                </div>
+            `
+
+            }
+
        }
        selecionado.innerHTML += `
        <button onclick="criarNiveis()">Prosseguir para criar níveis</button>
-       <div class="espaco"></div>
+       <div class="espaco2"></div>
        `
     
 //array dados
@@ -313,54 +424,111 @@ let dadosteste =
 console.log(dadosteste)
 
 
-let dadosPerguntas =[{
-    questions: [{
-        answers: [{
+let dadosPerguntas = {
+    title: `${tituloTela03Comeco}`,
+    image: `${urlImagemTela03Comeco}`,
+    questions: [
 
-        }]
 
-    }]
-}];
+    ]
+};
 
 function criarNiveis() {
     
 
     let selecionado = document.querySelector(".tela03Niveis")
     for(let i = 0; i < qtdNiveisTela03Comeco; i++) {
-        selecionado.innerHTML += `
-            <div class="conteudo ">
-                <p>Nível ${i + 1}</p>
-                <input type="text" placeholder="Título do nível">
-                <input type="number" name="" id="" placeholder="% de acerto mínimo">
-                <input type="url" name="" id="" placeholder="URL da imagem do nível">
-                <input type="text" placeholder="Descrição do nivel">
-            </div>
-        `
 
+        if(i == 0) {
+
+        selecionado.innerHTML += `
+        <div class="conteudo ">
+            <p>Nível ${i + 1}</p>
+            <input type="text" placeholder="Título do nível">
+            <input type="number" name="" id="" placeholder="% de acerto mínimo">
+            <input type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input type="text" placeholder="Descrição do nivel">
+        </div>
+    `
+
+        }
+        else {
+
+        selecionado.innerHTML += `
+        <div class="conteudo ">
+
+            <div class="ioniconsP">
+                <p>Nível ${i + 1}</p>
+                <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
+            </div>
+
+            <input type="text" placeholder="Título do nível">
+            <input type="number" name="" id="" placeholder="% de acerto mínimo">
+            <input type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input type="text" placeholder="Descrição do nivel">
+        </div>
+    `
+
+        }
     }
     selecionado.innerHTML += `
         <button onclick="finalizarQuizz()">Finalizar Quizz</button>
     `
     
     for (let i = 0; i < qtdPerguntasTela03Comeco; i++) {
+
+    console.log("validaão pergunta1")
+    console.log(dadosPerguntas)
+    console.log("validaão pergunta2")
         
         console.log(document.querySelector(".tela03Perguntas"))
        // console.log(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputpergunta01").value)
 
-        dadosPerguntas.questions.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value) 
-        dadosPerguntas.questions.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputCorPergunta").value)
+       let objtemporario = {}
 
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value)
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value)
+        objtemporario.title = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value 
+        objtemporario.color = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputCorPergunta").value
+        console.log(objtemporario)
 
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value)
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value)
+        objtemporario.answers = []
 
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value)
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value)
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value,
+            isCorrectAnswer: true,
+        })
 
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value)
-        dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value)
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value,
+            isCorrectAnswer: false,
+        })
+
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value,
+            isCorrectAnswer: false,
+        })
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value,
+            isCorrectAnswer: false,
+        })
+
+        dadosPerguntas.questions.push(objtemporario)
+        console.log(dadosPerguntas)
+
+    //    dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value)
+     //   dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value)
+
+       // dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value)
+       // dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value)
+
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value)
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value)
+
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value)
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value)
 
         /*
         let pergunta =  document.querySelector("tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector("input :nth-child(1)").value;
@@ -369,9 +537,6 @@ function criarNiveis() {
     
     }
 
-    console.log("validaão pergunta1")
-    console.log(dadosPerguntas)
-    console.log("validaão pergunta2")
 
 
     document.querySelector(".tela03Perguntas").classList.add("displaynone")
