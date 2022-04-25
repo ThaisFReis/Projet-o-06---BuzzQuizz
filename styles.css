@@ -47,6 +47,9 @@ body {
     line-height: 43px;
     color: #FFFFFF;
 }
+button {
+    cursor: pointer;
+}
 
 
 
@@ -73,6 +76,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
     }
 .tela01 .criarQuizz p {
     font-family: 'Roboto';
@@ -202,7 +206,7 @@ body {
 
 
 /*.tela01 p não funcionando como deveria funcionar(margin-top)---mudando para .tela01 nh*/
-.tela01 > :nth-child(2) {
+.tela01  p {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -647,6 +651,19 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.telao3Perguntas .conteudo .ioniconsP{
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+.tela03Perguntas .conteudo ion-icon{
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 440px;
+   
+}
 
 .tela03Perguntas > p {
     margin-bottom: 36px;
@@ -672,7 +689,7 @@ body {
     margin-bottom: 24px;
     
 }
-.tela03Perguntas .conteudo p {
+.tela03Perguntas .conteudo  p {
     margin-top: 25px;
     margin-bottom: 10px;
     display: inline;
@@ -681,6 +698,10 @@ body {
 .espaco {
     width: 10px;
     height: 10px;
+}
+.espaco2{
+    width: 10px;
+    height: 50px;
 }
 .perguntasDinamica {
     display: flex;
@@ -697,6 +718,10 @@ body {
     width: 100%;
     margin-bottom: 43px;
 }
+.tela03Niveis .conteudo p {
+    display: inline;
+    margin-bottom: 10px;
+}
 .tela03Niveis .conteudo {
     background-color: #FFFFFF;
 
@@ -706,9 +731,52 @@ body {
     padding-bottom: 11px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    margin-bottom: 24px;
+
+    
 }
-.tela03Niveis .conteudo p {
+.tela03Niveis .conteudo .ioniconsP  {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.tela03Niveis .conteudo .ioniconsP p {
     display: inline;
+}
+.tela03Niveis .conteudo  ion-icon {
+    cursor: pointer;
+}
+.tela03Niveis button {
+    margin-top: 74px;
+    margin-bottom: 50px;
+}
+.tela03Pronto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tela03Pronto p {
+    margin-top: 71px;
+    margin-bottom: 46px;
+    width: 100%;
+}
+.tela03Pronto :nth-child(3){
+    margin-top: 45px;
+    cursor: pointer;
+    width: 220px;
+    height: 44px;
+}
+.tela03Pronto :nth-child(4) {
+    margin-top: 10px;
+    background-color: #FAFAFA;
+    color: #818181;;
+    border: none;
+    cursor: pointer;
+    width: 220px;
+    height: 44px;
 }
 
 
@@ -785,7 +853,11 @@ body {
 
     /* Tela 3 */
     .tela03 input {
-        width: 375px;
+        max-width: 350px;
+    }
+    .tela03Perguntas .conteudo ion-icon{
+        margin-left: 225px;
+       
     }
 
     /* Tela 3 */

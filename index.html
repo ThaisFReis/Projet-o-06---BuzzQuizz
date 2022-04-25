@@ -24,15 +24,15 @@
 </div>
 
 <!--Primeira Tela (tela01)________________________________________________ -->
-<div class="tela01" >
+<div class="tela01 displaynone" >
 
 
-    <div class="criarQuizz">
+    <div class="criarQuizz " >
       <p>Você não criou nenhum <br/>quizz ainda :(</p>
       <button onclick="criarQuizz()">Criar Quizz</button>
     </div>
 
-  <!--
+  
     <div class="userQuizz">
       <div class="topo-userQuizz">  
         <p>Seus Quizzes</p>
@@ -41,6 +41,15 @@
       <div class="display"></div>
     </div>
   -->
+    <div class="seusQuizzes ">
+      <div class="tituloSeusQuizzes">
+        <p>Seus quizzes</p>
+        <ion-icon name="add-circle"></ion-icon>
+      </div >
+      
+      <div class="seusQuizzesRenderizados"></div>
+    </div>
+
     <p>Todos os Quizzes</p>
     <div class="todosOsQuizzes"></div>
 
@@ -73,7 +82,7 @@
 <!-- Terceira Tela (tela03) ============================================== -->
 <div class="tela03">
 
-  <div class="tela03Comeco displaynone">
+  <div class="tela03Comeco ">
 
     <div class="conteudo">
       <p>Comece pelo começo</p>
@@ -88,55 +97,77 @@
     
   </div>
 
-  <div class="tela03Perguntas displaynone ">
+  <div class="tela03Perguntas displaynone">
     <p>Crie suas perguntas</p>
 
     <div class="perguntasDinamica">
-<!--
-      <p>Pergunta 1</p>
-      <input type="text" placeholder="Texto da pergunta">
-      <input type="color" name="" id="" placeholder="Cor de fundo da pergunta">
+    <!--
+      <div class="conteudo ">
 
-      <p>Resposta correta</p>
-      <input type="text" placeholder="Resposta correta">
-      <input type="url" name="" id="" placeholder="URL da imagem">
+        <div class="ioniconsP">
+          <p>Pergunta 1</p>
+          <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
+        </div>
 
-      <p>Respostas incorretas</p>
-      <input type="text" placeholder="Resposta incorreta 1">
-      <input type="url" name="" id="" placeholder="URL da imagem 1">
+        <input type="text" placeholder="Texto da pergunta">
+        <input type="color" name="" id="" placeholder="Cor de fundo da pergunta">
 
-      <div class="espaco"></div>
+        <p>Resposta correta</p>
+        <input type="text" placeholder="Resposta correta">
+        <input type="url" name="" id="" placeholder="URL da imagem">
 
-      <input type="text" placeholder="Resposta incorreta 2">
-      <input type="url" name="" id="" placeholder="URL da imagem 2">
+        <p>Respostas incorretas</p>
+        <input type="text" placeholder="Resposta incorreta 1">
+        <input type="url" name="" id="" placeholder="URL da imagem 1">
 
-      <div class="espaco"></div>
+        <div class="espaco"></div>
 
-      <input type="text" placeholder="Resposta incorreta 3">
-      <input type="url" name="" id="" placeholder="URL da imagem 3">
+        <input type="text" placeholder="Resposta incorreta 2">
+        <input type="url" name="" id="" placeholder="URL da imagem 2">
 
-     
+        <div class="espaco"></div>
+
+        <input type="text" placeholder="Resposta incorreta 3">
+        <input type="url" name="" id="" placeholder="URL da imagem 3">
+
+      </div>
+    -->
   </div>
--->
+
     </div>
-  </div>
-  <div class="tela03Niveis displaynone ">
+  
+  <div class="tela03Niveis  displaynone">
 
       <p>Agora, decida os níveis</p>
 
+      <!--
       <div class="conteudo">
-        <p>Nível 1</p>
+
+        <div class="ioniconsP">
+          <p>Nível 1</p>
+          <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
+        </div>
+        
+
         <input type="text" placeholder="Título do nível">
         <input type="number" name="" id="" placeholder="% de acerto mínimo">
         <input type="url" name="" id="" placeholder="URL da imagem do nível">
         <input type="text" placeholder="Descrição do nivel">
 
       </div>
-      <button onclick="finalizarQuizz()">Finalizar Quizz</button>
+      -->
 
 
   </div>
-  <div class="tela03Pronto displaynone"></div>
+  <div class="tela03Pronto displaynone">
+    <p>Seu quizz está pronto!</p>
+    <div class="imagen">
+      <img src="img/1.png" alt="">
+    </div>
+    
+    <button onclick="acessarQuizz()">Acessar Quizz</button>
+    <button onclick="voltarHome()">Voltar para home</button>
+  </div>
 </div>
 
 
@@ -149,8 +180,7 @@
 
 
 
-
-    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="javascript.js"> </script>
     

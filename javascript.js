@@ -254,36 +254,37 @@ function voltar(){
 
 
 /* -------------------Tela 3--------------------------*/
+let tituloTela03Comeco;
+let urlImagemTela03Comeco
+let qtdPerguntasTela03Comeco;
+let qtdNiveisTela03Comeco;
+
+let dados;
 
 function criarPerguntas() {
 
-    let tituloTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(1)").value;
-    let urlImagemTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(2)").value;
-    let qtdPerguntasTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(3)").value;
-    let qtdNiveisTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(4)").value;
+    tituloTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(1)").value;
+    urlImagemTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(2)").value;
+    qtdPerguntasTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(3)").value;
+    qtdNiveisTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(4)").value;
+
     qtdPerguntasTela03Comeco = parseInt(qtdPerguntasTela03Comeco);
     qtdNiveisTela03Comeco = parseInt(qtdNiveisTela03Comeco);
 
-    let dados = {
-        title: `${tituloTela03Comeco}`,
-        image: `${urlImagemTela03Comeco}`,
-        qtdPerg: `${qtdPerguntasTela03Comeco}`,
-        qtdNiv: `${qtdNiveisTela03Comeco}`,
-    }
+ 
 
  
-    console.log(dados)
-    console.log(tituloTela03Comeco.length)
+   
 
 
-let validacao = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 20 || tituloTela03Comeco.length > 65 || urlImagemTela03Comeco == "" || qtdPerguntasTela03Comeco == "" || qtdPerguntasTela03Comeco < 3 || qtdNiveisTela03Comeco == "" || qtdNiveisTela03Comeco < 2);
+let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 20 || tituloTela03Comeco.length > 65 || urlImagemTela03Comeco == "" || !urlImagemTela03Comeco.includes("https://") || qtdPerguntasTela03Comeco == "" || qtdPerguntasTela03Comeco < 3 || qtdNiveisTela03Comeco == "" || qtdNiveisTela03Comeco < 2);
 
-    if(validacao) {
+    if(validacaoComeco) {
         document.querySelector(".tela03").querySelector(".inputs :nth-child(1)").value = "";
         document.querySelector(".tela03").querySelector(".inputs :nth-child(2)").value = "";
         document.querySelector(".tela03").querySelector(".inputs :nth-child(3)").value = "";
         document.querySelector(".tela03").querySelector(".inputs :nth-child(4)").value = "";
-        alert("Dados Invalidos, tente novamente.\nOBS:\n(1)Titulo entre 20 a 65 caracteres.\n(2)No minimo  3 perguntas.\n(3)No minimo 2 niveis.")
+        alert("Dados Invalidos, tente novamente.\nOBS:\n(1)Título do quizz: deve ter no mínimo 20 e no máximo 65 caracteres.\n(2)URL da Imagem: deve ter formato de URL.\n(3)Quantidade de perguntas: no mínimo 3 perguntas.\n(4)Quantidade de níveis: no mínimo 2 níveis.")
 
 
 
@@ -295,52 +296,277 @@ let validacao = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 20 || t
 
         let selecionado = document.querySelector(".tela03Perguntas").querySelector(".perguntasDinamica");
         
-    
+    //transformar/diminuir pergunta02
         for(let i = 0; i < qtdPerguntasTela03Comeco; i++) {
-        selecionado.innerHTML += `
-            <div class="conteudo">
+            if (i == 0) {
+
+
+            selecionado.innerHTML += `
+            <div class="conteudo pergunta${i + 1}">
                 <p>Pergunta ${i + 1}</p>
-                <input type="text" placeholder="Texto da pergunta">
-                <input type="color" name="" id="" placeholder="Cor de fundo da pergunta">
+                <input class="inputTextoPergunta" type="text" placeholder="Texto da pergunta">
+                <input class="inputCorPergunta" type="color" name="" id="" placeholder="Cor de fundo da pergunta">
 
                 <p>Resposta correta</p>
-                <input type="text" placeholder="Resposta correta">
-                <input type="url" name="" id="" placeholder="URL da imagem">
+                <input class="respostaCorreta" type="text" placeholder="Resposta correta">
+                <input class="urlImagemRespostaCorreta" type="url" name="" id="" placeholder="URL da imagem">
 
                 <p>Respostas incorretas</p>
-                <input type="text" placeholder="Resposta incorreta 1">
-                <input type="url" name="" id="" placeholder="URL da imagem 1">
+                <input class="respostaIncorreta01" type="text" placeholder="Resposta incorreta 1">
+                <input class="urlImagemRespostaIncorreta01" type="url" name="" id="" placeholder="URL da imagem 1">
 
                 <div class="espaco"></div>
 
-                <input type="text" placeholder="Resposta incorreta 2">
-                <input type="url" name="" id="" placeholder="URL da imagem 2">
+                <input class="respostaIncorreta02" type="text" placeholder="Resposta incorreta 2">
+                <input class="urlImagemRespostaIncorreta02" type="url" name="" id="" placeholder="URL da imagem 2">
 
                 <div class="espaco"></div>
 
-                <input type="text" placeholder="Resposta incorreta 3">
-                <input type="url" name="" id="" placeholder="URL da imagem 3">
+                <input class="respostaIncorreta03" type="text" placeholder="Resposta incorreta 3">
+                <input class="urlImagemRespostaIncorreta03" type="url" name="" id="" placeholder="URL da imagem 3">
 
             
             </div>
         `
+
+            }
+            else {
+
+                selecionado.innerHTML += `
+                <div class="conteudo pergunta${i + 1}">
+
+                    <div class="ioniconsP">
+                        <p>Pergunta ${i + 1}</p>
+                        <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
+                    </div>
+
+                    <input class="inputTextoPergunta" type="text" placeholder="Texto da pergunta">
+                    <input class="inputCorPergunta" type="color" name="" id="" placeholder="Cor de fundo da pergunta">
+    
+                    <p>Resposta correta</p>
+                    <input class="respostaCorreta" type="text" placeholder="Resposta correta">
+                    <input class="urlImagemRespostaCorreta" type="url" name="" id="" placeholder="URL da imagem">
+    
+                    <p>Respostas incorretas</p>
+                    <input class="respostaIncorreta01" type="text" placeholder="Resposta incorreta 1">
+                    <input class="urlImagemRespostaIncorreta01" type="url" name="" id="" placeholder="URL da imagem 1">
+    
+                    <div class="espaco"></div>
+    
+                    <input class="respostaIncorreta02" type="text" placeholder="Resposta incorreta 2">
+                    <input class="urlImagemRespostaIncorreta02" type="url" name="" id="" placeholder="URL da imagem 2">
+    
+                    <div class="espaco"></div>
+    
+                    <input class="respostaIncorreta03" type="text" placeholder="Resposta incorreta 3">
+                    <input class="urlImagemRespostaIncorreta03" type="url" name="" id="" placeholder="URL da imagem 3">
+    
+                
+                </div>
+            `
+
+            }
+
        }
        selecionado.innerHTML += `
        <button onclick="criarNiveis()">Prosseguir para criar níveis</button>
-       <div class="espaco"></div>
+       <div class="espaco2"></div>
        `
+    
+//array dados
+       dados = [{
+        title: `${tituloTela03Comeco}`,
+        image: `${urlImagemTela03Comeco}`,
+        questions: []
+        }]
+    
+    
+    
+    
+    
     }
 
 }
 
+
+//texte/lixo
+let dadosteste = 
+    {
+        title: "",
+        image: "",
+        questions: [
+            {
+                title: "",
+                color: "",
+                answers: [
+                    {
+                        text: "",
+                        image: "",
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: "",
+                        image: "",
+                        isCorrectAnswer: false
+
+                    }
+                ]
+            }
+        ]
+    } 
+
+
+
+console.log(dadosteste)
+
+
+let dadosPerguntas = {
+    title: `${tituloTela03Comeco}`,
+    image: `${urlImagemTela03Comeco}`,
+    questions: [
+
+
+    ]
+};
+
 function criarNiveis() {
-    document.querySelector(".tela03Perguntas").classList.add("displaynone")
-    document.querySelector(".tela03Niveis").querySelector.remove("displaynone")
     
+
+    let selecionado = document.querySelector(".tela03Niveis")
+    for(let i = 0; i < qtdNiveisTela03Comeco; i++) {
+
+        if(i == 0) {
+
+        selecionado.innerHTML += `
+        <div class="conteudo ">
+            <p>Nível ${i + 1}</p>
+            <input type="text" placeholder="Título do nível">
+            <input type="number" name="" id="" placeholder="% de acerto mínimo">
+            <input type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input type="text" placeholder="Descrição do nivel">
+        </div>
+    `
+
+        }
+        else {
+
+        selecionado.innerHTML += `
+        <div class="conteudo ">
+
+            <div class="ioniconsP">
+                <p>Nível ${i + 1}</p>
+                <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
+            </div>
+
+            <input type="text" placeholder="Título do nível">
+            <input type="number" name="" id="" placeholder="% de acerto mínimo">
+            <input type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input type="text" placeholder="Descrição do nivel">
+        </div>
+    `
+
+        }
+    }
+    selecionado.innerHTML += `
+        <button onclick="finalizarQuizz()">Finalizar Quizz</button>
+    `
+    
+    for (let i = 0; i < qtdPerguntasTela03Comeco; i++) {
+
+    console.log("validaão pergunta1")
+    console.log(dadosPerguntas)
+    console.log("validaão pergunta2")
+        
+        console.log(document.querySelector(".tela03Perguntas"))
+       // console.log(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputpergunta01").value)
+
+       let objtemporario = {}
+
+        objtemporario.title = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value 
+        objtemporario.color = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputCorPergunta").value
+        console.log(objtemporario)
+
+        objtemporario.answers = []
+
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value,
+            isCorrectAnswer: true,
+        })
+
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value,
+            isCorrectAnswer: false,
+        })
+
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value,
+            isCorrectAnswer: false,
+        })
+        objtemporario.answers.push({
+            text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value,
+            image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value,
+            isCorrectAnswer: false,
+        })
+
+        dadosPerguntas.questions.push(objtemporario)
+        console.log(dadosPerguntas)
+
+    //    dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value)
+     //   dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value)
+
+       // dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value)
+       // dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value)
+
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value)
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value)
+
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value)
+      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value)
+
+        /*
+        let pergunta =  document.querySelector("tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector("input :nth-child(1)").value;
+        let cor = document.querySelector("tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector("input :nth-child(2)").value;
+    */
+    
+    }
+
+
+
+    document.querySelector(".tela03Perguntas").classList.add("displaynone")
+    document.querySelector(".tela03Niveis").classList.remove("displaynone")
 
 }
 
+
 function finalizarQuizz() {
-    document.querySelector("tela03Niveis").classList.add("displaynone");
+    console.log("finalizar quizz")
+    let tituloTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(2)").value;
+    let acertosMinimoTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(3)").value;
+    let urlImagemTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(4)").value;
+    let descricaoTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(5)").value;
+    acertosMinimoTela03Niveis = parseInt(acertosMinimoTela03Niveis);
     
+    let validacaoNiveis = (tituloTela03Niveis == "" || tituloTela03Niveis.length < 10 || acertosMinimoTela03Niveis < 0 || acertosMinimoTela03Niveis > 100 || urlImagemTela03Niveis == "" || !urlImagemTela03Niveis.includes("https://") || descricaoTela03Niveis.length < 30);
+
+    if(validacaoNiveis) {
+        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(2)").value = "";
+        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(3)").value = "";
+        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(4)").value = "";
+        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(5)").value = "";
+        alert("Dados Invalidos, tente novamente.\nOBS:\n(1)Título do nível: mínimo de 10 caracteres.\n(2)% de acerto mínima: um número entre 0 e 100.\n(3)Descrição do nível: mínimo de 30 caracteres.\n(4)É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%.")
+    }
+    else {
+        document.querySelector(".tela03Niveis").classList.add("displaynone");
+        document.querySelector(".tela03Pronto").classList.remove("displaynone")
+    }
+
+    
+    
+}
+function voltarHome() {
+    document.querySelector(".tela03Pronto").classList.add("displaynone");
+    document.querySelector(".tela01").classList.remove("displaynone");
 }
