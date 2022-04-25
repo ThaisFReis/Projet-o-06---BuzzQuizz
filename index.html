@@ -32,11 +32,19 @@
       <button onclick="criarQuizz()">Criar Quizz</button>
     </div>
 
+    <div class="seusQuizzes">
+      <div class="tituloSeusQuizzes">
+        <p>Seus quizzes</p>
+        <ion-icon name="add-circle"></ion-icon>
+      </div >
+      
+      <div class="seusQuizzesRenderizados"></div>
+    </div>
+
     <p>Todos os Quizzes</p>
     <div class="todosOsQuizzes"></div>
 
  
-  <div class="testeTamanho">testeTamanho</div>
 
 </div>
 <!--/Primeira Tela (tela01)_______________________________________________ -->
@@ -94,7 +102,7 @@
     
   </div>
 
-  <div class="tela03Perguntas displaynone ">
+  <div class="tela03Perguntas displaynone">
     <p>Crie suas perguntas</p>
 
     <div class="perguntasDinamica">
@@ -126,10 +134,10 @@
 -->
     </div>
   </div>
-  <div class="tela03Niveis displaynone ">
+  <div class="tela03Niveis  displaynone">
 
       <p>Agora, decida os níveis</p>
-
+<!--
       <div class="conteudo">
         <p>Nível 1</p>
         <input type="text" placeholder="Título do nível">
@@ -138,11 +146,19 @@
         <input type="text" placeholder="Descrição do nivel">
 
       </div>
-      <button onclick="finalizarQuizz()">Finalizar Quizz</button>
+    -->  
 
 
   </div>
-  <div class="tela03Pronto displaynone"></div>
+  <div class="tela03Pronto displaynone">
+    <p>Seu quizz está pronto!</p>
+    <div class="imagen">
+      <img src="img/1.png" alt="">
+    </div>
+    
+    <button onclick="acessarQuizz()">Acessar Quizz</button>
+    <button onclick="voltarHome()">Voltar para home</button>
+  </div>
 </div>
 
 

@@ -87,7 +87,7 @@ body {
 }
 
 /*.tela01 p não funcionando como deveria funcionar(margin-top)---mudando para .tela01 nh*/
-.tela01 > :nth-child(2) {
+.tela01  p {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -101,12 +101,14 @@ body {
 .tela01 .todosOsQuizzes {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
+    
     
     width: 80%;
     margin-left: 10%;
     margin-top: 10px;
-    background-color: aqua;
+    
     
 }
 /*[TUTOR] tive que repetir 2 classes com a msm coisa*/
@@ -117,7 +119,7 @@ body {
     border-radius: 5px;
     position: relative;
     margin-bottom: 10px;
-    margin-right: 10px;
+    
     cursor: pointer;
     z-index: 1;
 }
@@ -381,9 +383,40 @@ body {
     padding-bottom: 11px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+
+    margin-bottom: 24px;
 }
 .tela03Niveis .conteudo p {
     display: inline;
+}
+.tela03Niveis button {
+    margin-top: 74px;
+    margin-bottom: 50px;
+}
+.tela03Pronto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tela03Pronto p {
+    margin-top: 71px;
+    margin-bottom: 46px;
+    width: 100%;
+}
+.tela03Pronto :nth-child(3){
+    margin-top: 45px;
+    cursor: pointer;
+    width: 220px;
+    height: 44px;
+}
+.tela03Pronto :nth-child(4) {
+    margin-top: 10px;
+    background-color: #FAFAFA;
+    color: #818181;;
+    border: none;
+    cursor: pointer;
+    width: 220px;
+    height: 44px;
 }
 
 
@@ -409,8 +442,12 @@ body {
     .tela01 .todosOsQuizzes {
         width: 92%;
         margin-left: 4%;
+     
         flex-direction: column;
         align-items: center;
+       
+       
+        
     }
 
     /* Tela 2 */
@@ -421,8 +458,9 @@ body {
 
     /* Tela 3 */
     .tela03 input {
-        width: 375px;
+        max-width: 350px;
     }
+
     
     
 
