@@ -24,23 +24,21 @@
 </div>
 
 <!--Primeira Tela (tela01)________________________________________________ -->
-<div class="tela01 displaynone" >
+<div class="tela01" >
 
-
-    <div class="criarQuizz " >
+    <div class="criarQuizz" >
       <p>Você não criou nenhum <br/>quizz ainda :(</p>
       <button onclick="criarQuizz()">Criar Quizz</button>
     </div>
 
   
-    <div class="userQuizz">
+    <div class="userQuizz displaynone">
       <div class="topo-userQuizz">  
         <p>Seus Quizzes</p>
         <button class="adicionarMais" onclick="criarQuizz()"><ion-icon name="add-circle"></ion-icon></button>
       </div>
-      <div class="display"></div>
+      <div class="seusQuizzesRenderizados"></div>
     </div>
-  
 
     <p>Todos os Quizzes</p>
     <div class="todosOsQuizzes"></div>
@@ -90,45 +88,10 @@
   </div>
 
   <div class="tela03Perguntas displaynone">
-    <p>Crie suas perguntas</p>
-
-    <div class="perguntasDinamica">
-    <!--
-      <div class="conteudo ">
-
-        <div class="ioniconsP">
-          <p>Pergunta 1</p>
-          <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
-        </div>
-
-        <input type="text" placeholder="Texto da pergunta">
-        <input type="color" name="" id="" placeholder="Cor de fundo da pergunta">
-
-        <p>Resposta correta</p>
-        <input type="text" placeholder="Resposta correta">
-        <input type="url" name="" id="" placeholder="URL da imagem">
-
-        <p>Respostas incorretas</p>
-        <input type="text" placeholder="Resposta incorreta 1">
-        <input type="url" name="" id="" placeholder="URL da imagem 1">
-
-        <div class="espaco"></div>
-
-        <input type="text" placeholder="Resposta incorreta 2">
-        <input type="url" name="" id="" placeholder="URL da imagem 2">
-
-        <div class="espaco"></div>
-
-        <input type="text" placeholder="Resposta incorreta 3">
-        <input type="url" name="" id="" placeholder="URL da imagem 3">
-
-      </div>
-    -->
+      <p>Crie suas perguntas</p>
   </div>
 
-    </div>
-  
-  <div class="tela03Niveis  displaynone">
+  <div class="tela03Niveis displaynone">
 
       <p>Agora, decida os níveis</p>
 
