@@ -24,7 +24,7 @@
 </div>
 
 <!--Primeira Tela (tela01)________________________________________________ -->
-<div class="tela01 displaynone" >
+<div class="tela01 " >
 
 
     <div class="criarQuizz " >
@@ -32,14 +32,15 @@
       <button onclick="criarQuizz()">Criar Quizz</button>
     </div>
 
-    <div class="seusQuizzes ">
-      <div class="tituloSeusQuizzes">
-        <p>Seus quizzes</p>
-        <ion-icon name="add-circle"></ion-icon>
-      </div >
-      
-      <div class="seusQuizzesRenderizados"></div>
+  
+    <div class="userQuizz">
+      <div class="topo-userQuizz">  
+        <p>Seus Quizzes</p>
+        <button class="adicionarMais" onclick="criarQuizz()"><ion-icon name="add-circle"></ion-icon></button>
+      </div>
+      <div class="display"></div>
     </div>
+  
 
     <p>Todos os Quizzes</p>
     <div class="todosOsQuizzes"></div>
@@ -73,7 +74,7 @@
 <!-- Terceira Tela (tela03) ============================================== -->
 <div class="tela03">
 
-  <div class="tela03Comeco ">
+  <div class="tela03Comeco displaynone">
 
     <div class="conteudo">
       <p>Comece pelo começo</p>

@@ -1,54 +1,36 @@
+/* -------------------Variáveis--------------------------*/
 let click = 0;
 let ponto = 0;
 let dadosPerguntas;
-
-//TELA 01
-/*
-const pegarTodosOsQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
-pegarTodosOsQuizzes.then(renderizarTodosOsQuizzes);
-console.log(pegarTodosOsQuizzes);
-
-function renderizarTodosOsQuizzes(resposta) {
-    let lista = resposta.data;
-    console.log(lista);
-
-    let selecionado = document.querySelector(".tela01").querySelector(".todosOsQuizzes")
-    for(let i = 0; i < 6; i++) {
-        selecionado.innerHTML += 
-        `
-        <div class="imagen" onclick="quizEscolhido(this)">
-            <img src="${lista[i].image}" alt="">
-            <p>${lista[i].title}</p>
-        </div>
-        `
-    }
-}
-function quizEscolhido() {
-    document.querySelector(".tela01").classList.add("displaynone");
-    document.querySelector(".tela02").classList.remove("displaynone");
-}
-*/
+let lista;
 
 
-
-
-
-
-
-
-// TELA 02
-// API
+/* -------------------API--------------------------*/
 const pegarTodosOsQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
 pegarTodosOsQuizzes.then(renderizarTodosOsQuizzes);
 pegarTodosOsQuizzes.catch(function (){ window.location.reload})
 console.log(pegarTodosOsQuizzes)
 
+
+
+/* -------------------Tela 1--------------------------*/
+
+function criarQuizz() {
+    const tela1 = document.querySelector(".tela01")
+    tela1.classList.add("displaynone");
+
+    let selecionado = document.querySelector(".tela03Comeco");
+    selecionado.classList.remove("displaynone");
+
+    setTimeout(() => {window.scrollTo({top: 0, behavior: "smooth",})});
+}
+
 function renderizarTodosOsQuizzes(resposta) {
     lista = resposta.data;
     console.log(lista)
 
-    let selecionado = document.querySelector(".tela01").querySelector(".todosOsQuizzes")
-    for(let i = 0; i < 6; i++) {
+    let selecionado = document.querySelector(".todosOsQuizzes")
+    for(let i = 0; i < lista.length; i++) {
         selecionado.innerHTML += 
         `
         <div class="imagen" onclick="abrindoQuizz(${lista[i].id})">
@@ -58,7 +40,25 @@ function renderizarTodosOsQuizzes(resposta) {
         </div>
         `
     }
+        userQuizz(resposta)
+}
 
+function userQuizz(resposta){
+    
+    lista = resposta.data;
+    console.log(lista)
+    let i = 0
+    const criarQuizz = document.querySelector(".display")
+    for(let i = 0; i < lista.length; i++) {
+        criarQuizz.innerHTML += `
+
+            <div class="display-userQuizzes" onclick="criarQuizz() )">         
+                <img src="${lista[i].image}" alt="">
+                <div class="gradiente-userQuizzes"></div>
+                <p>${lista[i].title}</p>
+            </div>
+        `
+    }
 }
 
 function abrindoQuizz(acessarId){
@@ -77,10 +77,14 @@ function pagina2(resposta){
     document.querySelector(".tela01").classList.add("displaynone")
     document.querySelector(".tela02").classList.remove("displaynone")
 
-    document.querySelector(".tela02").scrollIntoView();
+    setTimeout(() => {window.scrollTo({top: 0, behavior: "smooth",})});
     headerDoQuizz()
     renderizarPerguntas()
 }
+
+
+
+/* -------------------Tela 2--------------------------*/
 
 function headerDoQuizz(){
     const headerQuizz = document.querySelector("#titulo-quizz")
@@ -175,11 +179,10 @@ function escolherResposta(elemento){
     console.log(numeroDePerguntas)
     console.log(click)
     if(click == numeroDePerguntas){
-        let pontos = Math.round((click / numeroDePerguntas) * 100);
+        let pontos = Math.round((ponto / numeroDePerguntas) * 100);
         console.log(pontos)
         let niveis = lista.levels;
         console.log(niveis)
-        niveis.sort()
 
         niveis.forEach(lista => {
             if(pontos >= lista.minValue){
@@ -209,15 +212,15 @@ function escolherResposta(elemento){
     }
 
     if (!quizResultado.classList.contains("displaynone")){
-        pontos = 0
         click = 0
         ponto = 0
+        pontos = 0
     }
 } 
     
 
-// Botões
 
+/* -------------------Botões--------------------------*/
 
 function reiniciar(resposta){
     setTimeout(() => {
@@ -249,16 +252,9 @@ function voltar(){
 }
 
 
-//TELA 03
 
 
-function criarQuizz() {
-    document.querySelector(".tela01").classList.add("displaynone");
-
-    let selecionado = document.querySelector(".tela03Comeco");
-    selecionado.classList.remove("displaynone");
-}
-
+/* -------------------Tela 3--------------------------*/
 let tituloTela03Comeco;
 let urlImagemTela03Comeco
 let qtdPerguntasTela03Comeco;
