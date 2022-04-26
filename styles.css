@@ -279,6 +279,7 @@ button {
     text-align: center;
     word-wrap: break-word;
     color: white;
+    margin: 0 auto 0 auto;
     
 }
 
