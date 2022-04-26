@@ -578,7 +578,7 @@ button {
 
 /* -------------------Tela 3--------------------------*/
 
-/* ----------Tela 3 - 1 de 3 ----------*/
+/* ----------Tela 3 - 1 de 4 ----------*/
 
 .tela03 {
     height: 100vh;
@@ -659,7 +659,7 @@ button {
 /*------------------------------------------*/
 
 
-/* ----------Tela 3 - 2 de 3 ----------*/
+/* ----------Tela 3 - 2 de 4 ----------*/
 
 .tela03Perguntas {
     display: flex;
@@ -710,11 +710,10 @@ button {
     margin-bottom: 10px;
     display: inline;
 }
-
-
-
-
 /*------------------------------------------*/
+
+
+/* ----------Tela 3 - 3 de 4 ----------*/
 
 .tela03Niveis {
     display: flex;
@@ -761,15 +760,24 @@ button {
     margin-top: 74px;
     margin-bottom: 50px;
 }
+/*------------------------------------------*/
+
+
+/* ----------Tela 3 - 3 de 4 ----------*/
 .tela03Pronto {
+    height: fit-content;
+    margin: 150px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .tela03Pronto p {
+    position: absolute;
     margin-top: 71px;
     margin-bottom: 46px;
     width: 100%;
+    color: #FAFAFA;
+    margin: 150px auto 0 auto;
 }
 .tela03Pronto :nth-child(3){
     margin-top: 45px;
@@ -786,7 +794,7 @@ button {
     width: 220px;
     height: 44px;
 }
-
+/*------------------------------------------*/
 
 
 
