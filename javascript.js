@@ -12,6 +12,8 @@ pegarTodosOsQuizzes.catch(function (){ window.location.reload})
 console.log(pegarTodosOsQuizzes)
 
 
+
+
 /* -------------------Tela 1--------------------------*/
 function renderizarTodosOsQuizzes(resposta) {
     lista = resposta.data;
@@ -74,6 +76,7 @@ function renderizarMeusQuizzesVazios(resposta){
         </section >
         `;
 }
+
 
 
 function renderizarMeusQuizzes(quiz) {
@@ -785,7 +788,7 @@ function finalizarQuizz() {
 
         let selecionadoPronto = document.querySelector(".tela03Pronto").querySelector(".prontoDinamico");
         selecionadoPronto.innerHTML += `
-            <div class="imagen">
+            <div class="imagen ">
                 <img src="${dadosPerguntas.image}" alt="">
             </div>
         
