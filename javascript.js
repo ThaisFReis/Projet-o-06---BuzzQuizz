@@ -58,6 +58,7 @@ function userQuizz(resposta){
     }
 }
 
+
 /*
 function renderizarMeusQuizzesVazios(resposta){
     let listaMeusQuizzes = [];
