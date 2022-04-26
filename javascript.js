@@ -3,7 +3,7 @@ let click = 0;
 let ponto = 0;
 let dadosPerguntas;
 let lista;
-const header = document.querySelector("topoMeusQuizzes");
+const main = document.querySelector("main");
 
 /* -------------------API--------------------------*/
 const pegarTodosOsQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
@@ -15,10 +15,16 @@ console.log(pegarTodosOsQuizzes)
 
 
 /* -------------------Tela 1--------------------------*/
+function criarQuizz() {
+    const tela1 = document.querySelector(".tela01")
+    tela1.classList.add("displaynone");
+    let selecionado = document.querySelector(".tela03Comeco");
+    selecionado.classList.remove("displaynone");
+    setTimeout(() => {window.scrollTo({top: 0, behavior: "smooth",})});
+}
 function renderizarTodosOsQuizzes(resposta) {
     lista = resposta.data;
     console.log(lista)
-
     let selecionado = document.querySelector(".todosOsQuizzes")
     for(let i = 0; i < lista.length; i++) {
         selecionado.innerHTML += 
@@ -30,18 +36,29 @@ function renderizarTodosOsQuizzes(resposta) {
         </div>
         `
     }
-
+        userQuizz(resposta)
 }
 
 /* ---------------------Tela 1 - Quizzes do User --------------------------*/
 
-
-function getUserQuizzes() {
-    const pegar = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
-    pegar.then(renderizarMeusQuizzesVazios);
+function userQuizz(resposta){
+    
+    lista = resposta.data;
+    console.log(lista)
+    let i = 0
+    const criarQuizz = document.querySelector(".seusQuizzesRenderizados")
+    for(let i = 0; i < lista.length; i++) {
+        criarQuizz.innerHTML += `
+            <div class="display-userQuizzes" onclick="criarQuizz() )">         
+                <img src="${lista[i].image}" alt="">
+                <div class="gradiente-userQuizzes"></div>
+                <p>${lista[i].title}</p>
+            </div>
+        `
+    }
 }
 
-
+/*
 function renderizarMeusQuizzesVazios(resposta){
     let listaMeusQuizzes = [];
     let quizzesAll;
@@ -70,7 +87,7 @@ function renderizarMeusQuizzesVazios(resposta){
         console.log(listaMeusQuizzes);
     }
     
-    header.innerHTML = `
+    main.innerHTML = `
         <section class="topoMeusQuizzes">
             ${renderizarMeusQuizzes(listaMeusQuizzes)}          
         </section >
@@ -123,16 +140,7 @@ function renderMeusQuizzes(resposta) {
     });
     return meusQuizzesRenderizados;
 }
-
-function criarQuizz() {
-    const tela1 = document.querySelector(".tela01")
-    tela1.classList.add("displaynone");
-
-    let selecionado = document.querySelector(".tela03Comeco");
-    selecionado.classList.remove("displaynone");
-
-    setTimeout(() => {window.scrollTo({top: 0, behavior: "smooth",})});
-}
+*/
 
 /*---------------------------------------------------------------*/
 
