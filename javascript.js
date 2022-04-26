@@ -33,7 +33,8 @@ function renderizarTodosOsQuizzes(resposta) {
 
 /* ---------------------Tela 1 - Quizzes do User --------------------------*/
 
-function renderizarMeusQuizzes(resposta) {
+function renderizarMeusQuizzes() {
+    let resposta = JSON.parse(localStorage.getItem('meusquizzes'))
     const header = document.querySelector("topoMeusQuizzes")
     
     if (resposta.length <= []) {
