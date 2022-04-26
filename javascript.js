@@ -742,7 +742,7 @@ function finalizarQuizz() {
         }
 
         let selecionadoPronto = document.querySelector(".tela03Pronto").querySelector(".prontoDinamico");
-        selecionadoPronto = `
+        selecionadoPronto.innerHTML += `
             <div class="imagen">
                 <img src="${dadosPerguntas.image}" alt="">
             </div>
