@@ -7,6 +7,7 @@
             box-sizing: border-box;
     font-family: "Roboto", sans-serif !important;
     outline: none !important;
+    cursor: auto;
   }
 
 body {
@@ -48,6 +49,7 @@ body {
     color: #FFFFFF;
 }
 button {
+    border: none;
     cursor: pointer;
 }
 
@@ -69,15 +71,21 @@ button {
     left: 194px;
     top: 146px;
     border: 1px dashed #D5D5D5;
-    box-sizing: border-box;
     border-radius: 5px;
     margin-left: 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 15px;
+
     align-items: center;
     
     }
+
+.criarQuizz.displaynone{
+    display: none;
+}
+
 .tela01 .criarQuizz p {
     font-family: 'Roboto';
     font-style: normal;
@@ -86,6 +94,7 @@ button {
     line-height: 23px;
     color: #B9B9B9;
     text-align: center;
+    margin: 0 auto 0 auto;
 }
 .tela01 .criarQuizz button {
     width: 151px;
@@ -94,7 +103,6 @@ button {
     border: 1px dashed #EC362D;
     box-sizing: border-box;
     border-radius: 50px;
-    margin-top: 10px;
 
     font-style: normal;
     font-weight: 400;
@@ -102,6 +110,7 @@ button {
     line-height: 25px;
     color: #EC362D;
     cursor: pointer;
+    margin: 0 auto 0 auto;
 }
 
 /* User Quizz - Com quizz*/
@@ -121,11 +130,12 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: left;
+    align-items: center;
     margin-top: auto;
     margin-bottom: auto;
 }
 
-.topo-userQuizz p{
+.userQuizz .topo-userQuizz p{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -134,8 +144,7 @@ button {
     display: flex;
     align-items: center;
     text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: auto 10px auto 10px;
     
     color: #000000;   
 }
@@ -149,9 +158,10 @@ button {
     background-color: transparent;
     border: none;
     cursor: auto;
+    margin: auto 10px auto 10px;
 }
 
-.display{
+.seusQuizzesRenderizados{
     display: flex;
     width: 100%;
     height: 181px;
@@ -160,7 +170,7 @@ button {
     overflow-x: scroll;
 }
 
-.display-userQuizzes{
+.userQuizz .display-userQuizzes{
     position: relative;
     width: 340px;
     height: 170px;
@@ -172,7 +182,7 @@ button {
 
 }
 
-.display-userQuizzes p{
+.userQuizz .display-userQuizzes p{
     position: absolute;
 
     width: 90%;
@@ -563,18 +573,17 @@ button {
     cursor: pointer;
     
 }
-
-
-
+/*------------------------------------------*/
 
 
 /* -------------------Tela 3--------------------------*/
 
-
+/* ----------Tela 3 - 1 de 3 ----------*/
 
 .tela03 {
-    margin-top: 69px;
-    padding-top: 37px;
+    height: 100vh;
+    width: 100%;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
 
@@ -646,6 +655,12 @@ button {
     text-align: center;
     color: #FFF5F4;
 }
+
+/*------------------------------------------*/
+
+
+/* ----------Tela 3 - 2 de 3 ----------*/
+
 .tela03Perguntas {
     display: flex;
     flex-direction: column;
@@ -672,6 +687,7 @@ button {
 
 .tela03Perguntas .conteudo {
     background-color: #FFFFFF;
+    height: fit-content;
 
     padding-left: 16px;
     padding-right: 16px;
@@ -693,21 +709,13 @@ button {
     margin-top: 25px;
     margin-bottom: 10px;
     display: inline;
-   
 }
-.espaco {
-    width: 10px;
-    height: 10px;
-}
-.espaco2{
-    width: 10px;
-    height: 50px;
-}
-.perguntasDinamica {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
+
+
+
+/*------------------------------------------*/
+
 .tela03Niveis {
     display: flex;
     flex-direction: column;
@@ -778,6 +786,7 @@ button {
     width: 220px;
     height: 44px;
 }
+
 
 
 
@@ -870,6 +879,35 @@ button {
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
