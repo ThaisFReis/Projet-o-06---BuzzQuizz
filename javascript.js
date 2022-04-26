@@ -1,5 +1,6 @@
 let click = 0;
 let ponto = 0;
+let dadosPerguntas;
 
 //TELA 01
 /*
@@ -265,6 +266,8 @@ let qtdNiveisTela03Comeco;
 
 let dados;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function criarPerguntas() {
 
     tituloTela03Comeco = document.querySelector(".tela03").querySelector(".inputs :nth-child(1)").value;
@@ -383,8 +386,19 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
         image: `${urlImagemTela03Comeco}`,
         questions: []
         }]
-    
-    
+        
+        
+        dadosPerguntas = {
+            title: `${tituloTela03Comeco}`,
+            image: `${urlImagemTela03Comeco}`,
+            questions: [
+        
+            ],
+            levels: [
+        
+            ],
+        };
+        
     
     
     
@@ -393,45 +407,20 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
 }
 
 
-//texte/lixo
-let dadosteste = 
-    {
-        title: "",
-        image: "",
-        questions: [
-            {
-                title: "",
-                color: "",
-                answers: [
-                    {
-                        text: "",
-                        image: "",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "",
-                        image: "",
-                        isCorrectAnswer: false
-
-                    }
-                ]
-            }
-        ]
-    } 
-
-
-
-console.log(dadosteste)
-
-
-let dadosPerguntas = {
+/*
+dadosPerguntas = {
     title: `${tituloTela03Comeco}`,
     image: `${urlImagemTela03Comeco}`,
     questions: [
 
+    ],
+    levels: [
 
-    ]
+    ],
 };
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function criarNiveis() {
     
@@ -442,12 +431,12 @@ function criarNiveis() {
         if(i == 0) {
 
         selecionado.innerHTML += `
-        <div class="conteudo ">
+        <div class="conteudo niveis${i + 1}">
             <p>Nível ${i + 1}</p>
-            <input type="text" placeholder="Título do nível">
-            <input type="number" name="" id="" placeholder="% de acerto mínimo">
-            <input type="url" name="" id="" placeholder="URL da imagem do nível">
-            <input type="text" placeholder="Descrição do nivel">
+            <input class="inputNiveisTitulo" type="text" placeholder="Título do nível">
+            <input class="inputNiveisAcertoMinimo" type="number" name="" id="" placeholder="% de acerto mínimo">
+            <input class="inputNiveisUrlImagem" type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input class="inputNiveisDescricao" type="text" placeholder="Descrição do nivel">
         </div>
     `
 
@@ -455,17 +444,17 @@ function criarNiveis() {
         else {
 
         selecionado.innerHTML += `
-        <div class="conteudo ">
+        <div class="conteudo niveis${i + 1}">
 
             <div class="ioniconsP">
                 <p>Nível ${i + 1}</p>
                 <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
             </div>
 
-            <input type="text" placeholder="Título do nível">
-            <input type="number" name="" id="" placeholder="% de acerto mínimo">
-            <input type="url" name="" id="" placeholder="URL da imagem do nível">
-            <input type="text" placeholder="Descrição do nivel">
+            <input class="inputNiveisTitulo" type="text" placeholder="Título do nível">
+            <input class="inputNiveisAcertoMinimo" type="number" name="" id="" placeholder="% de acerto mínimo">
+            <input class="inputNiveisUrlImagem" type="url" name="" id="" placeholder="URL da imagem do nível">
+            <input class="inputNiveisDescricao" type="text" placeholder="Descrição do nivel">
         </div>
     `
 
@@ -474,15 +463,99 @@ function criarNiveis() {
     selecionado.innerHTML += `
         <button onclick="finalizarQuizz()">Finalizar Quizz</button>
     `
-    
-    for (let i = 0; i < qtdPerguntasTela03Comeco; i++) {
+    //////validação
+    let contadorValidacaoPerguntas = 0
+    for(let i = 0; i < qtdPerguntasTela03Comeco; i++) {
+        let textoDaPergunta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value;
+        let corDeFundoDaPergunta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputCorPergunta").value;
 
-    console.log("validaão pergunta1")
-    console.log(dadosPerguntas)
-    console.log("validaão pergunta2")
-        
-        console.log(document.querySelector(".tela03Perguntas"))
-       // console.log(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputpergunta01").value)
+        let respostaCorreta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value;
+        let urlDaImagemCorreta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value;
+
+        let respostaIncorreta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value;
+        let urlDaImagemIncorreta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value;
+
+        let validacao123 = ( textoDaPergunta.length < 20 || respostaCorreta == "" || urlDaImagemCorreta == "" ||  !urlDaImagemCorreta.includes("https://") || respostaIncorreta == "" ||  urlDaImagemIncorreta == "" );
+
+        if(validacao123) {
+            contadorValidacaoPerguntas++;
+        }
+
+    }
+
+    if(contadorValidacaoPerguntas > 0) {
+
+        for(let i = 0; i < qtdPerguntasTela03Comeco; i++) {
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputCorPergunta").value = "";
+
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value = "";
+
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value = "";
+            document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value = "";
+        }
+        alert("Dados Invalidos, tente novamente.\nOBS:\n(1)Texto da pergunta: no mínimo 20 caracteres.\n(2)Textos das respostas: não pode estar vazio.\n(3)URL das imagens de resposta: deve ter formato de URL\n(4)É obrigatória a inserção da resposta correta e de pelo menos 1 resposta errada. Portanto, é permitido existirem perguntas com só 2 ou 3 respostas em vez de 4.")
+    }
+    else {
+        // pode passar pra proxima pag, validaçao concluitda
+
+        for (let i = 0; i < qtdPerguntasTela03Comeco; i++) {
+
+            let objtemporario = {}
+     
+             objtemporario.title = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value 
+             objtemporario.color = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputCorPergunta").value
+             console.log(objtemporario)
+     
+             objtemporario.answers = []
+     
+             objtemporario.answers.push({
+                 text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value,
+                 image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value,
+                 isCorrectAnswer: true,
+             })
+     
+             objtemporario.answers.push({
+                 text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value,
+                 image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value,
+                 isCorrectAnswer: false,
+             })
+     
+             objtemporario.answers.push({
+                 text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value,
+                 image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value,
+                 isCorrectAnswer: false,
+             })
+             objtemporario.answers.push({
+                 text: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value,
+                 image: document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value,
+                 isCorrectAnswer: false,
+             })
+     
+             dadosPerguntas.questions.push(objtemporario)
+         }
+     
+         console.log("----dadosPerguntas1----")
+         console.log(dadosPerguntas)
+         console.log("----dadosPerguntas1----")
+     
+     
+         document.querySelector(".tela03Perguntas").classList.add("displaynone")
+         document.querySelector(".tela03Niveis").classList.remove("displaynone")
+
+    }
+
+
+
+    /*
+
+
+    for (let i = 0; i < qtdPerguntasTela03Comeco; i++) {
 
        let objtemporario = {}
 
@@ -516,56 +589,132 @@ function criarNiveis() {
         })
 
         dadosPerguntas.questions.push(objtemporario)
-        console.log(dadosPerguntas)
-
-    //    dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaCorreta").value)
-     //   dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaCorreta").value)
-
-       // dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta01").value)
-       // dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta01").value)
-
-      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta02").value)
-      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta02").value)
-
-      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".respostaIncorreta03").value)
-      //  dadosPerguntas.questions.answers.push(document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".urlImagemRespostaIncorreta03").value)
-
-        /*
-        let pergunta =  document.querySelector("tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector("input :nth-child(1)").value;
-        let cor = document.querySelector("tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector("input :nth-child(2)").value;
-    */
-    
     }
 
+    console.log("----dadosPerguntas1----")
+    console.log(dadosPerguntas)
+    console.log("----dadosPerguntas1----")
 
 
     document.querySelector(".tela03Perguntas").classList.add("displaynone")
     document.querySelector(".tela03Niveis").classList.remove("displaynone")
 
+    */
+
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let meusQuizzes;
 
 function finalizarQuizz() {
-    console.log("finalizar quizz")
-    let tituloTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(2)").value;
-    let acertosMinimoTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(3)").value;
-    let urlImagemTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(4)").value;
-    let descricaoTela03Niveis = document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(5)").value;
-    acertosMinimoTela03Niveis = parseInt(acertosMinimoTela03Niveis);
-    
-    let validacaoNiveis = (tituloTela03Niveis == "" || tituloTela03Niveis.length < 10 || acertosMinimoTela03Niveis < 0 || acertosMinimoTela03Niveis > 100 || urlImagemTela03Niveis == "" || !urlImagemTela03Niveis.includes("https://") || descricaoTela03Niveis.length < 30);
 
-    if(validacaoNiveis) {
-        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(2)").value = "";
-        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(3)").value = "";
-        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(4)").value = "";
-        document.querySelector(".tela03Niveis").querySelector(".conteudo :nth-child(5)").value = "";
+    let contadorValidacaoNiveisAcertosMinimos = 0
+    let contadorValidacaoNiveis = 0;
+    for(let i = 0; i < qtdNiveisTela03Comeco; i++) {
+
+        let tituloTela03Niveis = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisTitulo").value;
+        let acertosMinimoTela03Niveis = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisAcertoMinimo").value;
+        let urlImagemTela03Niveis = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisUrlImagem").value;
+        let descricaoTela03Niveis = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisDescricao").value;
+        acertosMinimoTela03Niveis = parseInt(acertosMinimoTela03Niveis);
+
+       
+        let tamanhotituloTela03Niveis = tituloTela03Niveis.length;
+        let validacaoNiveis = (tituloTela03Niveis == "" || tamanhotituloTela03Niveis < 10 || acertosMinimoTela03Niveis < 0 || acertosMinimoTela03Niveis > 100 || urlImagemTela03Niveis == "" || !urlImagemTela03Niveis.includes("https://") || descricaoTela03Niveis.length < 30);
+        
+        if(acertosMinimoTela03Niveis == 0) {
+            contadorValidacaoNiveisAcertosMinimos++
+        }
+        if(validacaoNiveis || contadorValidacaoNiveisAcertosMinimos == 0) {
+            contadorValidacaoNiveis++
+        }
+
+    }
+
+    
+
+    if(contadorValidacaoNiveis > 0) {
+
+        for(let i = 0; i < qtdNiveisTela03Comeco; i++) {
+
+            document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisTitulo").value = "";
+            document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisAcertoMinimo").value = "";
+            document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisUrlImagem").value = "";
+            document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisDescricao").value = "";
+        }
         alert("Dados Invalidos, tente novamente.\nOBS:\n(1)Título do nível: mínimo de 10 caracteres.\n(2)% de acerto mínima: um número entre 0 e 100.\n(3)Descrição do nível: mínimo de 30 caracteres.\n(4)É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%.")
     }
     else {
+
+        for(let i = 0; i < qtdNiveisTela03Comeco; i++) {
+
+            let objtemporario = {}
+
+            objtemporario.title = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisTitulo").value;
+            objtemporario.image = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisUrlImagem").value;
+            objtemporario.text = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisDescricao").value;
+            objtemporario.minValue = document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisAcertoMinimo").value;
+            
+            dadosPerguntas.levels.push(objtemporario)
+            /*
+            let objtemporario = {}
+    
+            objtemporario.push({
+    
+                title: document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisTitulo").value,
+                image: document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisAcertoMinimo").value,
+                text: document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisUrlImagem").value,
+                minValue: document.querySelector(".tela03Niveis").querySelector(`.niveis${i + 1}`).querySelector(".inputNiveisDescricao").value,
+    
+            })
+            dadosPerguntas.levels.push(objtemporario)
+            */
+        }
+
+
+        const enviarDados = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",dadosPerguntas);
+        enviarDados.then((resposta) => {
+            meusQuizzes.push({
+                id: resposta.data.id,
+            });
+            localStorage.setItem("quizzes", "meusQuizzes")
+
+        })
+
+
+
+        enviarDados.catch(erro);
+
+
+        function erro() {
+            console.log(enviarDados)
+            console.log(enviarDados.catch())
+            alert("deu pau")
+        }
+
+
+
+
+
+
+
+
         document.querySelector(".tela03Niveis").classList.add("displaynone");
-        document.querySelector(".tela03Pronto").classList.remove("displaynone")
+        document.querySelector(".tela03Pronto").classList.remove("displaynone");
+
+        console.log("----dadosPerguntas2----")
+        console.log(dadosPerguntas)
+        console.log("----dadosPerguntas2----")
     }
+
+
+  
+
+
+
+
+
 
     
     
@@ -574,3 +723,9 @@ function voltarHome() {
     document.querySelector(".tela03Pronto").classList.add("displaynone");
     document.querySelector(".tela01").classList.remove("displaynone");
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
