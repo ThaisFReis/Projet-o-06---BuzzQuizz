@@ -12,19 +12,7 @@ pegarTodosOsQuizzes.catch(function (){ window.location.reload})
 console.log(pegarTodosOsQuizzes)
 
 
-
 /* -------------------Tela 1--------------------------*/
-
-function criarQuizz() {
-    const tela1 = document.querySelector(".tela01")
-    tela1.classList.add("displaynone");
-
-    let selecionado = document.querySelector(".tela03Comeco");
-    selecionado.classList.remove("displaynone");
-
-    setTimeout(() => {window.scrollTo({top: 0, behavior: "smooth",})});
-}
-
 function renderizarTodosOsQuizzes(resposta) {
     lista = resposta.data;
     console.log(lista)
@@ -40,26 +28,68 @@ function renderizarTodosOsQuizzes(resposta) {
         </div>
         `
     }
-        userQuizz(resposta)
+
 }
 
-function userQuizz(resposta){
-    
-    lista = resposta.data;
-    console.log(lista)
-    let i = 0
-    const criarQuizz = document.querySelector(".display")
-    for(let i = 0; i < lista.length; i++) {
-        criarQuizz.innerHTML += `
+/* ---------------------Tela 1 - Quizzes do User --------------------------*/
 
-            <div class="display-userQuizzes" onclick="criarQuizz() )">         
-                <img src="${lista[i].image}" alt="">
-                <div class="gradiente-userQuizzes"></div>
-                <p>${lista[i].title}</p>
+function renderizarMeusQuizzes(resposta) {
+    const header = document.querySelector("topoMeusQuizzes")
+    
+    if (resposta.length <= []) {
+        localStorage.removeItem('meusquizzes')
+        return header.innerHTML =`
+            <div class="criarQuizz" >
+                <p>Você não criou nenhum <br/>quizz ainda :(</p>
+                <button onclick="criarQuizz()">Criar Quizz</button>
             </div>
+        `
+    } else {
+        return header.innerHTML =`
+        <div class="userQuizz displaynone">
+            <div class="topo-userQuizz">  
+            <p>Seus Quizzes</p>
+            <button class="adicionarMais" onclick="criarQuizz()"><ion-icon name="add-circle"></ion-icon></button>
+            </div>
+            <div class="seusQuizzesRenderizados">${renderMeusQuizzes(resposta, 1)}</div>
+        </div>  
+             </div>
         `
     }
 }
+
+function renderMeusQuizzes(lista,) {
+    let meusQuizzesRenderizados = "";
+    lista.map(lista => {
+        const {
+            image,
+            title,
+            id,
+        } = lista;
+
+        meusQuizzesRenderizados += `
+
+        <div class="imagen" onclick="abrindoQuizz(${lista[i].id})">
+            <img src="${lista[i].image}" alt="">
+            <div class="gradiente">
+            <p>${lista[i].title}</p>
+        </div>
+        `
+    });
+    return meusQuizzesRenderizados;
+}
+
+function criarQuizz() {
+    const tela1 = document.querySelector(".tela01")
+    tela1.classList.add("displaynone");
+
+    let selecionado = document.querySelector(".tela03Comeco");
+    selecionado.classList.remove("displaynone");
+
+    setTimeout(() => {window.scrollTo({top: 0, behavior: "smooth",})});
+}
+
+/*---------------------------------------------------------------*/
 
 function abrindoQuizz(acessarId){
 
@@ -711,7 +741,13 @@ function finalizarQuizz() {
             alert("deu pau")
         }
 
-
+        let selecionadoPronto = document.querySelector(".tela03Pronto").querySelector(".prontoDinamico");
+        selecionadoPronto = `
+            <div class="imagen">
+                <img src="${dadosPerguntas.image}" alt="">
+            </div>
+        
+        `
 
 
 
@@ -724,19 +760,11 @@ function finalizarQuizz() {
         console.log("----dadosPerguntas2----")
         console.log(dadosPerguntas)
         console.log("----dadosPerguntas2----")
-    }
-
-
-  
-
-
-
-
-
-
-    
+    } 
     
 }
+
+
 function voltarHome() {
     document.querySelector(".tela03Pronto").classList.add("displaynone");
     document.querySelector(".tela01").classList.remove("displaynone");

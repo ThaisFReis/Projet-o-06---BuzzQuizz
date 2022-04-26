@@ -236,7 +236,7 @@ button {
     justify-items: center;
     
     width: 80%;
-    height: 450px;
+    height: 850px;
     margin-left: 10%;
     margin-top: 10px;
     overflow-y: scroll;
@@ -711,6 +711,8 @@ button {
     margin-bottom: 10px;
     display: inline;
 }
+
+
 /*------------------------------------------*/
 
 
@@ -731,7 +733,7 @@ button {
     margin-bottom: 10px;
 }
 .tela03Niveis .conteudo {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     padding-left: 16px;
     padding-right: 16px;
