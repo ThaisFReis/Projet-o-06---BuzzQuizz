@@ -460,6 +460,7 @@ function criarNiveis() {
         <button onclick="finalizarQuizz()">Finalizar Quizz</button>
     `
     //////validação
+    let contadorEspacoVazio = 0
     let contadorValidacaoPerguntas = 0
     for(let i = 0; i < qtdPerguntasTela03Comeco; i++) {
         let textoDaPergunta = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(".inputTextoPergunta").value;
@@ -476,6 +477,17 @@ function criarNiveis() {
         if(validacao123) {
             contadorValidacaoPerguntas++;
         }
+
+        for (let j = 0; j < 2; j++) {
+            let respostaIncorretaOutro2e3 = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(`.respostaIncorreta0${j + 2}`).value;
+            let urlImagemIncorretaOutro2e3 = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(`.urlImagemRespostaIncorreta0${j + 2}`).value;
+
+            if(respostaIncorretaOutro2e3  == "" || urlImagemIncorretaOutro2e3 == "") {
+                contadorEspacoVazio++
+            }
+
+        }
+       
 
     }
 
