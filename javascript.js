@@ -48,7 +48,7 @@ function userQuizz(resposta){
     lista = resposta.data;
     console.log(lista)
     let i = 0
-    const criarQuizz = document.querySelector(".seusQuizzesRenderizados")
+    const criarQuizz = document.querySelector(".display")
     for(let i = 0; i < lista.length; i++) {
         criarQuizz.innerHTML += `
 
@@ -82,12 +82,9 @@ function pagina2(resposta){
     renderizarPerguntas()
 }
 
-/* ----------------------------------------------------------------*/
 
 
-
-
-/* ----------------------------Tela 2------------------------------*/
+/* -------------------Tela 2--------------------------*/
 
 function headerDoQuizz(){
     const headerQuizz = document.querySelector("#titulo-quizz")
@@ -253,14 +250,11 @@ function reiniciar(resposta){
 function voltar(){
     window.location.reload()
 }
-/* ----------------------------------------------------*/
 
 
 
 
-/* -----------------------------Tela 3------------------------------*/
-
-/* -------------------Variáveis--------------------------*/
+/* -------------------Tela 3--------------------------*/
 let tituloTela03Comeco;
 let urlImagemTela03Comeco
 let qtdPerguntasTela03Comeco;
@@ -268,8 +262,7 @@ let qtdNiveisTela03Comeco;
 
 let dados;
 
-
-/* ----------------------------------------------------*/
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function criarPerguntas() {
 
@@ -304,7 +297,7 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
         document.querySelector(".tela03Comeco").classList.add("displaynone");
         document.querySelector(".tela03Perguntas").classList.remove("displaynone");
 
-        let selecionado = document.querySelector(".tela03Perguntas");
+        let selecionado = document.querySelector(".tela03Perguntas").querySelector(".perguntasDinamica");
         
     //transformar/diminuir pergunta02
         for(let i = 0; i < qtdPerguntasTela03Comeco; i++) {
@@ -316,18 +309,25 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
                 <p>Pergunta ${i + 1}</p>
                 <input class="inputTextoPergunta" type="text" placeholder="Texto da pergunta">
                 <input class="inputCorPergunta" type="color" name="" id="" placeholder="Cor de fundo da pergunta">
+
                 <p>Resposta correta</p>
                 <input class="respostaCorreta" type="text" placeholder="Resposta correta">
                 <input class="urlImagemRespostaCorreta" type="url" name="" id="" placeholder="URL da imagem">
+
                 <p>Respostas incorretas</p>
                 <input class="respostaIncorreta01" type="text" placeholder="Resposta incorreta 1">
                 <input class="urlImagemRespostaIncorreta01" type="url" name="" id="" placeholder="URL da imagem 1">
+
                 <div class="espaco"></div>
+
                 <input class="respostaIncorreta02" type="text" placeholder="Resposta incorreta 2">
                 <input class="urlImagemRespostaIncorreta02" type="url" name="" id="" placeholder="URL da imagem 2">
+
                 <div class="espaco"></div>
+
                 <input class="respostaIncorreta03" type="text" placeholder="Resposta incorreta 3">
                 <input class="urlImagemRespostaIncorreta03" type="url" name="" id="" placeholder="URL da imagem 3">
+
             
             </div>
         `
@@ -336,11 +336,13 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
             else {
 
                 selecionado.innerHTML += `
-                <div class="conteudo pergunta${i + 1} ">
+                <div class="conteudo pergunta${i + 1}">
+
                     <div class="ioniconsP">
                         <p>Pergunta ${i + 1}</p>
                         <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
                     </div>
+
                     <input class="inputTextoPergunta" type="text" placeholder="Texto da pergunta">
                     <input class="inputCorPergunta" type="color" name="" id="" placeholder="Cor de fundo da pergunta">
     
@@ -357,19 +359,13 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
                     <input class="respostaIncorreta02" type="text" placeholder="Resposta incorreta 2">
                     <input class="urlImagemRespostaIncorreta02" type="url" name="" id="" placeholder="URL da imagem 2">
     
+                    <div class="espaco"></div>
+    
                     <input class="respostaIncorreta03" type="text" placeholder="Resposta incorreta 3">
                     <input class="urlImagemRespostaIncorreta03" type="url" name="" id="" placeholder="URL da imagem 3">
-                </div>
-<!--
-                <div class="conteudo perguntaTopo${i + 1}" onclick="transformar()">
-                    <div class="ioniconsP">
-                        <p>Pergunta ${i + 1}</p>
-                        <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
-                    </div>
-                </div>
--->
-
+    
                 
+                </div>
             `
 
             }
@@ -403,44 +399,8 @@ let validacaoComeco = (tituloTela03Comeco == "" || tituloTela03Comeco.length < 2
     
     
     }
+
 }
-/*
-function transformar(){
-    const perguntasSelecionar = document.querySelector(".conteudo.pergunta")
-    perguntasSelecionar.classList.toggle("hiddenPerguntas")
-}
-*/
-//texte/lixo
-let dadosteste = 
-    {
-        title: "",
-        image: "",
-        questions: [
-            {
-                title: "",
-                color: "",
-                answers: [
-                    {
-                        text: "",
-                        image: "",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "",
-                        image: "",
-                        isCorrectAnswer: false
-
-                    }
-                ]
-            }
-        ]
-    } 
-
-
-
-console.log(dadosteste)
-
-
 
 
 /*
@@ -484,7 +444,7 @@ function criarNiveis() {
 
             <div class="ioniconsP">
                 <p>Nível ${i + 1}</p>
-                <ion-icon onclick="transformar(this)" name="create-outline"></ion-icon>
+                <ion-icon onclick="transformar()" name="create-outline"></ion-icon>
             </div>
 
             <input class="inputNiveisTitulo" type="text" placeholder="Título do nível">
@@ -517,7 +477,7 @@ function criarNiveis() {
         if(validacao123) {
             contadorValidacaoPerguntas++;
         }
-
+        /*
         for (let j = 0; j < 2; j++) {
             let respostaIncorretaOutro2e3 = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(`.respostaIncorreta0${j + 2}`).value;
             let urlImagemIncorretaOutro2e3 = document.querySelector(".tela03Perguntas").querySelector(`.pergunta${i + 1}`).querySelector(`.urlImagemRespostaIncorreta0${j + 2}`).value;
@@ -527,8 +487,9 @@ function criarNiveis() {
             }
 
         }
+        */
        
-
+        
     }
 
     if(contadorValidacaoPerguntas > 0) {
@@ -650,11 +611,18 @@ function criarNiveis() {
     */
 
 }
+/*
+if (localStorage.getItem("quizzes") == "" || localStorage.getItem("quizzes") == null)  {
+    let meusQuizzes = []
+}
+else {
+    let meusQuizzes = localStorage.getItem("quizzes")
+}
+*/
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+let meusQuizzes = JSON.parse(localStorage.getItem("quizzes"));
 
-let meusQuizzes;
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function finalizarQuizz() {
 
     let contadorValidacaoNiveisAcertosMinimos = 0
@@ -677,7 +645,6 @@ function finalizarQuizz() {
         if(validacaoNiveis || contadorValidacaoNiveisAcertosMinimos == 0) {
             contadorValidacaoNiveis++
         }
-
     }
 
     
@@ -723,21 +690,24 @@ function finalizarQuizz() {
 
         const enviarDados = axios.post("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes",dadosPerguntas);
         enviarDados.then((resposta) => {
-            meusQuizzes.push({
-                id: resposta.data.id,
-            });
-            localStorage.setItem("quizzes", "meusQuizzes")
+            console.log(resposta);
+
+            meusQuizzes.push({id: resposta.data.id });
+            localStorage.setItem("quizzes", JSON.stringify(meusQuizzes))
+            let getaaa = localStorage.getItem("quizzes")
+
+            getaaa = JSON.parse(getaaa)
+            
+            console.log(localStorage.getItem("quizzes"))
+            console.log(getaaa)
+            console.log(meusQuizzes)
 
         })
 
 
 
         enviarDados.catch(erro);
-
-
         function erro() {
-            console.log(enviarDados)
-            console.log(enviarDados.catch())
             alert("deu pau")
         }
 
