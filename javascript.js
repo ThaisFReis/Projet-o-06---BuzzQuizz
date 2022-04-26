@@ -49,7 +49,7 @@ function userQuizz(resposta){
     const criarQuizz = document.querySelector(".seusQuizzesRenderizados")
     for(let i = 0; i < lista.length; i++) {
         criarQuizz.innerHTML += `
-            <div class="display-userQuizzes" onclick="criarQuizz() )">         
+            <div class="display-userQuizzes" onclick="abrindoQuizz(${lista[i].id})">         
                 <img src="${lista[i].image}" alt="">
                 <div class="gradiente-userQuizzes"></div>
                 <p>${lista[i].title}</p>
