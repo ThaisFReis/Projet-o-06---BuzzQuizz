@@ -3,7 +3,7 @@ let click = 0;
 let ponto = 0;
 let dadosPerguntas;
 let lista;
-
+const header = document.querySelector("topoMeusQuizzes");
 
 /* -------------------API--------------------------*/
 const pegarTodosOsQuizzes = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes");
@@ -33,46 +33,88 @@ function renderizarTodosOsQuizzes(resposta) {
 
 /* ---------------------Tela 1 - Quizzes do User --------------------------*/
 
-function renderizarMeusQuizzes(resposta) {
-    const header = document.querySelector("topoMeusQuizzes")
+
+function getUserQuizzes() {
+    const pegar = axios.get("https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes")
+    pegar.then(renderizarMeusQuizzesVazios);
+}
+
+
+function renderizarMeusQuizzesVazios(resposta){
+    let listaMeusQuizzes = [];
+    let quizzesAll;
+    let lista = JSON.parse(localStorage.getItem("meusquizzes"));
+    const allQuizzes = resposta.data;
+
+    if (lista != null ) {
+
+        quizzesAll = allQuizzes.filter(quiz =>{
+            let count = 0;
+            for(let i=0; i<lista.length; i++){
+                
+                if(quiz.id === lista[i].id){
+                    count++;
+                }
+            }
+
+            if (count === 0){
+                return quiz
+            } else {
+                listaMeusQuizzes.push(quiz)
+            }
+        })
+       
+        console.log(quizzesAll);
+        console.log(listaMeusQuizzes);
+    }
     
-    if (resposta.length <= []) {
+    header.innerHTML = `
+        <section class="topoMeusQuizzes">
+            ${renderizarMeusQuizzes(listaMeusQuizzes)}          
+        </section >
+        `;
+}
+
+
+function renderizarMeusQuizzes(quiz) {
+    
+    if (quiz.length <= []) {
         localStorage.removeItem('meusquizzes')
-        return header.innerHTML =`
+        return `
             <div class="criarQuizz" >
                 <p>Você não criou nenhum <br/>quizz ainda :(</p>
                 <button onclick="criarQuizz()">Criar Quizz</button>
             </div>
         `
     } else {
-        return header.innerHTML =`
+        return `
         <div class="userQuizz displaynone">
             <div class="topo-userQuizz">  
             <p>Seus Quizzes</p>
             <button class="adicionarMais" onclick="criarQuizz()"><ion-icon name="add-circle"></ion-icon></button>
             </div>
-            <div class="seusQuizzesRenderizados">${renderMeusQuizzes(resposta, 1)}</div>
+            <div class="seusQuizzesRenderizados">${renderMeusQuizzes(quiz, 1)}</div>
         </div>  
              </div>
         `
     }
 }
 
-function renderMeusQuizzes(lista,) {
+function renderMeusQuizzes(resposta) {
     let meusQuizzesRenderizados = "";
-    lista.map(lista => {
+    resposta.map(respostas=> {
         const {
             image,
             title,
             id,
-        } = lista;
+        } = respostas;
 
         meusQuizzesRenderizados += `
 
-        <div class="imagen" onclick="abrindoQuizz(${lista[i].id})">
-            <img src="${lista[i].image}" alt="">
+        <div class="imagen" onclick="abrindoQuizz(${id})">
+            <img src="${image}" alt="">
             <div class="gradiente">
-            <p>${lista[i].title}</p>
+            <p>${title}</p>
         </div>
         `
     });
